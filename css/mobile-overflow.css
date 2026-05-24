@@ -1,0 +1,13 @@
+/* ── MOBILE OVERFLOW FIXES ──────────────── */
+.co-table-wrap {
+  width: 100%; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.pipeline-scroll-wrap {
+  width: 100%; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 28px;
+}
+.pipeline-row { min-width: 580px; margin-bottom: 0; overflow-x: visible; }
+.co-table, .data-table { min-width: 480px; }
+.card { overflow: hidden; }

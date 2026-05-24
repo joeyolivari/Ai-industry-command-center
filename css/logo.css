@@ -1,0 +1,27 @@
+/* ── LOGO ROBOT BUTTON ─────────────────── */
+@keyframes robotIdle {
+  0%,100% { transform: translateY(0px) scale(1); }
+  50%      { transform: translateY(-2px) scale(1.03); }
+}
+@keyframes robotBurst {
+  0%   { transform: scale(1);    filter: brightness(0.9) contrast(1.1) saturate(0.8); }
+  25%  { transform: scale(0.9);  filter: brightness(2.5) saturate(3) hue-rotate(20deg); box-shadow: 0 0 0 6px rgba(0,212,255,0.5); }
+  60%  { transform: scale(1.18); filter: brightness(2.0) saturate(2) drop-shadow(0 0 12px #00d4ff); }
+  100% { transform: scale(1);    filter: brightness(0.9) contrast(1.1) saturate(0.8); }
+}
+#logoBtn {
+  animation: robotIdle 4s ease-in-out infinite;
+}
+#logoBtn img {
+  mix-blend-mode: luminosity;
+  filter: brightness(0.9) contrast(1.1) saturate(0.8);
+  transition: filter 0.25s, transform 0.25s;
+}
+#logoBtn:hover img {
+  filter: brightness(2.2) contrast(1.2) saturate(1.8) drop-shadow(0 0 14px #c084fc) drop-shadow(0 0 28px #7b61ff) drop-shadow(0 0 4px #fff) !important;
+  transform: scale(1.08);
+  mix-blend-mode: normal;
+}
+#logoBtn.clicking img {
+  animation: robotBurst 0.45s ease forwards;
+}
