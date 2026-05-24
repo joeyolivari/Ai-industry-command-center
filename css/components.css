@@ -115,6 +115,78 @@
   color: var(--muted);
 }
 /* ── KPI GRID ──────────────────────── */
+/* Market overview keeps the data surface above the fold. */
+#market .story-rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+#market .story-step {
+  min-height: 28px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+}
+#market .story-step span {
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+}
+#market .section-story {
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: 12px;
+  padding: 11px 14px;
+  margin-bottom: 10px;
+}
+#market .story-question {
+  font-size: 14px;
+}
+#market .story-answer {
+  font-size: 12px;
+  line-height: 1.45;
+}
+#market .path-strip {
+  gap: 8px;
+  margin-bottom: 12px;
+}
+#market .path-card {
+  min-height: 58px;
+  padding: 9px 11px;
+  gap: 3px;
+}
+#market .path-kicker {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+}
+#market .path-title {
+  font-size: 13px;
+}
+#market .path-meta {
+  display: none;
+}
+#market .filter-bar {
+  margin-bottom: 12px;
+}
+#market .kpi-row {
+  gap: 12px;
+  margin-bottom: 16px;
+}
+#market .kpi {
+  padding: 14px;
+  border-radius: 8px;
+}
+#market .kpi-label {
+  margin-bottom: 7px;
+}
+#market .kpi-val {
+  font-size: 23px;
+  margin-bottom: 6px;
+}
+#market .kpi-sub {
+  margin-top: 6px;
+}
+
 .kpi-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
