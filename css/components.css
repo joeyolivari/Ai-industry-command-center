@@ -1,3 +1,53 @@
+/* Quick paths */
+.path-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.path-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  min-height: 94px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+.path-card:hover {
+  border-color: var(--accent);
+  background: rgba(0,212,255,0.05);
+  transform: translateY(-1px);
+}
+.path-card.primary {
+  border-color: rgba(0,212,255,0.35);
+  background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,229,160,0.07));
+}
+.path-kicker {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.path-title {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+.path-meta {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+}
 /* ── KPI GRID ──────────────────────── */
 .kpi-row {
   display: grid;

@@ -24,50 +24,50 @@
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">Dashboards</div>
-    <div class="nav-item active" onclick="show('market',this)">
+    <div class="nav-label">Intelligence</div>
+    <div class="nav-item active" data-nav="market" onclick="show('market',this)">
       <span class="nav-dot"></span> Market Overview
     </div>
-    <div class="nav-item" onclick="show('companies',this)">
+    <div class="nav-item" data-nav="companies" onclick="show('companies',this)">
       <span class="nav-dot"></span> Company Intelligence
     </div>
-    <div class="nav-item" onclick="show('investment',this)">
+    <div class="nav-item" data-nav="investment" onclick="show('investment',this)">
       <span class="nav-dot"></span> Investment & Funding
     </div>
-    <div class="nav-item" onclick="show('segments',this)">
+    <div class="nav-item" data-nav="segments" onclick="show('segments',this)">
       <span class="nav-dot"></span> Sector Breakdown
     </div>
-    <div class="nav-item" onclick="show('trends',this)">
+    <div class="nav-item" data-nav="trends" onclick="show('trends',this)">
       <span class="nav-dot"></span> Trends & Forecast
     </div>
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">BA Tools</div>
-    <div class="nav-item" onclick="show('simulator',this)">
+    <div class="nav-label">Interactive</div>
+    <div class="nav-item" data-nav="simulator" onclick="show('simulator',this)">
       <span class="nav-dot"></span> Stakeholder Sim
       <span class="nav-badge" id="navScore">0</span>
     </div>
-    <div class="nav-item" onclick="show('pipeline',this)">
+    <div class="nav-item" data-nav="pipeline" onclick="show('pipeline',this)">
       <span class="nav-dot"></span> Data Pipeline
     </div>
-    <div class="nav-item" onclick="show('schema',this)">
+    <div class="nav-item" data-nav="schema" onclick="show('schema',this)">
       <span class="nav-dot"></span> Star Schema
     </div>
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">Project</div>
-    <div class="nav-item" onclick="show('about',this)">
+    <div class="nav-label">Reference</div>
+    <div class="nav-item" data-nav="about" onclick="show('about',this)">
       <span class="nav-dot"></span> About This Project
     </div>
-    <div class="nav-item" onclick="show('jargon',this)">
+    <div class="nav-item" data-nav="jargon" onclick="show('jargon',this)">
       <span class="nav-dot"></span> Plain-English Guide
     </div>
-    <div class="nav-item" onclick="show('summary',this)">
+    <div class="nav-item" data-nav="summary" onclick="show('summary',this)">
       <span class="nav-dot"></span> Final Summary
     </div>
-    <div class="nav-item" onclick="show('downloads',this)">
+    <div class="nav-item" data-nav="downloads" onclick="show('downloads',this)">
       <span class="nav-dot"></span> Download Center
       <span class="nav-badge" style="background:var(--green);color:#000">↓</span>
     </div>
@@ -112,6 +112,28 @@
   <!-- ══════════ MARKET OVERVIEW ══════════ -->
   <div id="market" class="section active">
 
+    <div class="path-strip" aria-label="Quick paths">
+      <button class="path-card" onclick="show('companies',document.querySelector('[data-nav=companies]'))">
+        <span class="path-kicker">Compare</span>
+        <span class="path-title">Company Signals</span>
+        <span class="path-meta">ARR, valuations, positioning</span>
+      </button>
+      <button class="path-card primary" onclick="show('simulator',document.querySelector('[data-nav=simulator]'))">
+        <span class="path-kicker">Practice</span>
+        <span class="path-title">Stakeholder Simulator</span>
+        <span class="path-meta">Turn questions into BI outputs</span>
+      </button>
+      <button class="path-card" onclick="show('downloads',document.querySelector('[data-nav=downloads]'))">
+        <span class="path-kicker">Export</span>
+        <span class="path-title">Source Data</span>
+        <span class="path-meta">CSV files and dictionary</span>
+      </button>
+      <button class="path-card" onclick="show('summary',document.querySelector('[data-nav=summary]'))">
+        <span class="path-kicker">Review</span>
+        <span class="path-title">Executive Summary</span>
+        <span class="path-meta">Portfolio-ready outcomes</span>
+      </button>
+    </div>
     <!-- Filter / Compare bar -->
     <div class="filter-bar">
       <span class="filter-label">Period</span>
