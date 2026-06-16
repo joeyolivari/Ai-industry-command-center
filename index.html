@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Industry Command Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#060912">
+<meta name="description" content="AI Industry Command Center — an interactive business-intelligence dashboard tracking the AI market, company revenue, investment flows, and data-product design. Research by Joey Carbajo Olivari.">
+<title>AI Industry Command Center · Joey Carbajo Olivari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -87,13 +92,22 @@
 <div class="main">
 
   <!-- TICKER -->
-  <div class="ticker-bar">
-    <div class="ticker-item"><span class="t-name">AI Market 2025</span><span class="t-val">$542B</span><span class="t-up">▲ 38.5% CAGR</span></div>
-    <div class="ticker-item"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
-    <div class="ticker-item"><span class="t-name">Anthropic ARR</span><span class="t-val">$30B</span><span class="t-up">▲ 80× in 18mo</span></div>
-    <div class="ticker-item"><span class="t-name">US Private AI Investment 2024</span><span class="t-val">$109.1B</span><span class="t-up">▲ 12× China</span></div>
-    <div class="ticker-item"><span class="t-name">Global AI Forecast 2034</span><span class="t-val">$3.68T</span><span class="t-up">▲ 19.2% CAGR</span></div>
-    <div class="ticker-item"><span class="t-name">Enterprise AI Adoption 2024</span><span class="t-val">78%</span><span class="t-up">▲ from 55% in 2023</span></div>
+  <div class="ticker-bar" aria-label="Live AI market indicators">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="t-name">AI Market 2025</span><span class="t-val">$542B</span><span class="t-up">▲ 38.5% CAGR</span></div>
+      <div class="ticker-item"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
+      <div class="ticker-item"><span class="t-name">Anthropic ARR</span><span class="t-val">$30B</span><span class="t-up">▲ 80× in 18mo</span></div>
+      <div class="ticker-item"><span class="t-name">US Private AI Investment 2024</span><span class="t-val">$109.1B</span><span class="t-up">▲ 12× China</span></div>
+      <div class="ticker-item"><span class="t-name">Global AI Forecast 2034</span><span class="t-val">$3.68T</span><span class="t-up">▲ 19.2% CAGR</span></div>
+      <div class="ticker-item"><span class="t-name">Enterprise AI Adoption 2024</span><span class="t-val">78%</span><span class="t-up">▲ from 55% in 2023</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">AI Market 2025</span><span class="t-val">$542B</span><span class="t-up">▲ 38.5% CAGR</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">Anthropic ARR</span><span class="t-val">$30B</span><span class="t-up">▲ 80× in 18mo</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">US Private AI Investment 2024</span><span class="t-val">$109.1B</span><span class="t-up">▲ 12× China</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">Global AI Forecast 2034</span><span class="t-val">$3.68T</span><span class="t-up">▲ 19.2% CAGR</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">Enterprise AI Adoption 2024</span><span class="t-val">78%</span><span class="t-up">▲ from 55% in 2023</span></div>
+    </div>
   </div>
 
   <!-- TOPBAR -->
