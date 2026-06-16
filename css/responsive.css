@@ -29,31 +29,43 @@
   .sidebar.mobile-open { transform: translateX(0); }
   .main { margin-left: 0; }
 
-  .section { padding: 18px 14px 56px; overflow-x: hidden; }
+  .section { padding: 18px 14px 56px; overflow-x: hidden; max-width: 100vw; }
 
   /* Topbar stays compact and never forces horizontal scroll */
   .topbar { padding: 0 12px; height: 58px; overflow: hidden; }
-  .page-title { font-size: 15px; max-width: calc(100vw - 160px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex-shrink: 1; }
+  .page-title { font-size: 13px; max-width: calc(100vw - 150px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex-shrink: 1; letter-spacing: 0.04em; }
   .topbar-right { flex-shrink: 0; gap: 6px; }
-  .tb-btn { padding: 7px 11px; font-size: 11px; }
+  .tb-btn { padding: 6px 10px; font-size: 10px; }
 
   /* Generous, readable story framing */
   .story-rail { grid-template-columns: minmax(0,1fr); gap: 6px; }
-  .story-step { min-height: 36px; padding: 10px 12px; }
-  .section-story { padding: 16px 16px; margin-bottom: 14px; }
-  .story-question { font-size: 16px; }
-  .story-answer { font-size: 13px; }
+  .story-step { min-height: 40px; padding: 10px 12px; }
+  /* Override the #market compact story-rail on mobile for readability */
+  #market .story-rail { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+  #market .story-step { min-height: 40px; padding: 8px 10px; font-size: 10px; }
 
-  .path-strip { grid-template-columns: minmax(0,1fr); gap: 10px; margin-bottom: 14px; }
-  .path-card { min-height: 76px; padding: 16px 18px; }
+  /* Section-story: collapse to 1 column on mobile regardless of specificity */
+  .section-story,
+  #market .section-story {
+    grid-template-columns: minmax(0,1fr) !important;
+    padding: 14px 14px;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+  .story-question { font-size: 15px; }
+  .story-answer { font-size: 12px; }
+
+  .path-strip { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-bottom: 12px; }
+  .path-card { min-height: 72px; padding: 12px 14px; }
+  .path-meta { display: none; }
 
   /* Two-up KPI cards read well on phones */
   .kpi-row { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
-  .kpi { padding: 16px 14px; }
-  .kpi-val { font-size: 23px; }
-  .card { padding: 18px; border-radius: var(--r-md); }
+  .kpi { padding: 14px 12px; }
+  .kpi-val { font-size: 22px; }
+  .card { padding: 16px; border-radius: var(--r-md); }
 
-  /* Ticker scrolls on its own; allow gentle nudge if needed */
+  /* Ticker scrolls on its own */
   .ticker-bar { padding: 7px 0; }
   .ticker-track { animation-duration: 30s; }
 
@@ -82,10 +94,18 @@
   .workflow-row { flex-direction: column; }
   .workflow-step { border-right: none; border-bottom: 1px solid var(--border); }
   .workflow-step:last-child { border-bottom: none; }
-  .brief-hero, .summary-hero { padding: 28px 18px; }
+  .brief-hero, .summary-hero { padding: 24px 16px; }
   .sim-chips { gap: 8px; }
   .sim-chip { font-size: 12px; padding: 10px 14px; }
   .score-display { flex-wrap: wrap; }
+
+  /* Filter bar: ensure chips wrap cleanly */
+  .filter-bar { padding: 10px 12px; gap: 6px; row-gap: 8px; }
+  .filter-chip { font-size: 11px; padding: 5px 11px; }
+
+  /* Chart wrap: hard constraint on mobile */
+  .chart-wrap { overflow: hidden; max-width: 100%; }
+  canvas { max-width: 100% !important; }
 
   #logoBtn { width: 38px !important; height: 38px !important; }
 }

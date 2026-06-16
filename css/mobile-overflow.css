@@ -11,3 +11,29 @@
 .pipeline-row { min-width: 580px; margin-bottom: 0; overflow-x: visible; }
 .co-table, .data-table { min-width: 480px; }
 .card { overflow: hidden; }
+
+/* ── HARD OVERFLOW GUARDS ───────────────── */
+
+/* Every grid child must not blowout its column */
+.grid-2 > *, .grid-3 > *, .grid-3-1 > *, .grid-1-2 > * {
+  min-width: 0; max-width: 100%; box-sizing: border-box;
+}
+
+/* Flex children in cards must shrink */
+.card-header { min-width: 0; }
+.card-header > div { min-width: 0; flex-shrink: 1; overflow: hidden; }
+
+/* Text in card headers must not overflow */
+.card-title, .card-sub { max-width: 100%; word-break: break-word; }
+
+/* Horizontal bar items */
+.hbar-list { width: 100%; }
+.hbar-item { min-width: 0; }
+.hbar-meta { min-width: 0; width: 100%; }
+.hbar-name { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Section content must not force horizontal scroll */
+.section { box-sizing: border-box; }
+
+/* Filter bar must not overflow */
+.filter-bar { width: 100%; box-sizing: border-box; overflow: hidden; }

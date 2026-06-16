@@ -127,12 +127,12 @@
   <div id="market" class="section active">
 
     <div class="story-rail" aria-label="Analysis story">
-      <div class="story-step active"><span>1</span>Size the market</div>
-      <div class="story-step"><span>2</span>Compare winners</div>
-      <div class="story-step"><span>3</span>Follow capital</div>
-      <div class="story-step"><span>4</span>Translate needs</div>
-      <div class="story-step"><span>5</span>Model the data</div>
-      <div class="story-step"><span>6</span>Export evidence</div>
+      <div class="story-step active" role="button" tabindex="0" onclick="goStep(this,'market')"><span>1</span>Size the market</div>
+      <div class="story-step" role="button" tabindex="0" onclick="goStep(this,'companies')"><span>2</span>Compare winners</div>
+      <div class="story-step" role="button" tabindex="0" onclick="goStep(this,'investment')"><span>3</span>Follow capital</div>
+      <div class="story-step" role="button" tabindex="0" onclick="goStep(this,'segments')"><span>4</span>Translate needs</div>
+      <div class="story-step" role="button" tabindex="0" onclick="goStep(this,'pipeline')"><span>5</span>Model the data</div>
+      <div class="story-step" role="button" tabindex="0" onclick="goStep(this,'downloads')"><span>6</span>Export evidence</div>
     </div>
     <div class="section-story">
       <div class="story-question">How big is the AI opportunity, and why does it matter now?</div>
@@ -167,7 +167,7 @@
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2026',this)">2026</button>
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2030',this)">2030 est.</button>
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2034',this)">2034 est.</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-range-wrap" style="margin-left:auto;display:flex;align-items:center;gap:8px">
         <span class="filter-label">Year Range</span>
         <div class="range-wrap">
           <span class="range-val">2019</span>
@@ -457,7 +457,7 @@
       <button class="filter-chip active" data-group="inv-view" onclick="setInvFilter('total',this)">Total Investment</button>
       <button class="filter-chip" data-group="inv-view" onclick="setInvFilter('genai',this)">GenAI Only</button>
       <button class="filter-chip" data-group="inv-view" onclick="setInvFilter('geo',this)">By Geography</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-range-wrap" style="margin-left:auto;display:flex;align-items:center;gap:8px">
         <span class="filter-label">Year</span>
         <div class="range-wrap">
           <span class="range-val">2019</span>
@@ -673,7 +673,7 @@
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('openai',this)">OpenAI</button>
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('xai',this)">xAI</button>
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('all',this)">All</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-range-wrap" style="margin-left:auto;display:flex;align-items:center;gap:8px">
         <span class="filter-label">From</span>
         <div class="range-wrap">
           <span class="range-val">Jan'24</span>

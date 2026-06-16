@@ -34,6 +34,12 @@ function toggleMobileNav() {
 
 // ─── NAVIGATION ────────────────────────────────────
 
+function goStep(stepEl, sectionId) {
+  document.querySelectorAll('#market .story-step').forEach(s => s.classList.remove('active'));
+  stepEl.classList.add('active');
+  show(sectionId, document.querySelector('[data-nav=' + sectionId + ']'));
+}
+
 function show(id, el) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -124,9 +130,11 @@ function lineChart(id, labels, datasets, opts={}) {
     ctx.fillText(opts.fmt ? opts.fmt(val) : val.toFixed(0), pad - 8, y + 4);
   }
 
-  // x-axis labels
+  // x-axis labels — skip some when canvas is narrow to prevent overlap
   ctx.textAlign = 'center'; ctx.fillStyle = C.muted; ctx.font = '10px var(--font-sans)';
+  const _skipN = Math.ceil(labels.length / Math.max(1, Math.floor(cw / 52)));
   labels.forEach((l, i) => {
+    if (i % _skipN !== 0 && i !== labels.length - 1) return;
     const x = pad + cw * i / (labels.length - 1);
     ctx.fillText(l, x, h - 6);
   });
@@ -430,7 +438,8 @@ function lineCI(id, labels, datasets, opts={}) {
     ctx.fillText(opts.fmt?opts.fmt(v):v.toFixed(0), pad-8, y+4);
   }
   ctx.textAlign='center'; ctx.fillStyle=C.muted; ctx.font='10px var(--font-sans)';
-  labels.forEach((l,i)=>{ const x=pad+cw*i/(labels.length-1); ctx.fillText(l,x,h-6); });
+  const _skip=Math.ceil(labels.length/Math.max(1,Math.floor(cw/52)));
+  labels.forEach((l,i)=>{ if(i%_skip!==0&&i!==labels.length-1) return; const x=pad+cw*i/(labels.length-1); ctx.fillText(l,x,h-6); });
 
   const byX={};
   datasets.forEach((ds,di)=>{
