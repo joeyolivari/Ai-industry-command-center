@@ -1,29 +1,105 @@
+/* ─────────────────────────────────────────────────────────
+   DESIGN SYSTEM — "Intelligence Terminal"
+   Refined dark fintech/BI console. Distinctive type, layered
+   depth, precise spacing. Accent hues are kept in sync with the
+   canvas chart palette defined in js/data/appData.js.
+   ───────────────────────────────────────────────────────── */
+
 :root {
-  --font-sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', 'SF Mono', monospace;
-  --font-display: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --bg:        #080c14;
+  /* Typography — distinctive, professional pairing */
+  --font-sans:    'Manrope', system-ui, -apple-system, sans-serif;
+  --font-display: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+
+  /* Surfaces & depth */
+  --bg:        #060912;
+  --bg2:       #080d1a;
   --surface:   #0d1422;
-  --surface2:  #111927;
-  --border:    rgba(255,255,255,0.07);
-  --border2:   rgba(255,255,255,0.12);
+  --surface2:  #111a2b;
+  --surface3:  #16203455;
+  --border:    rgba(150,180,235,0.10);
+  --border2:   rgba(150,180,235,0.20);
+
+  /* Accents — DO NOT change hue values: charts read these in JS */
   --accent:    #00d4ff;
   --accent2:   #7b61ff;
   --green:     #00e5a0;
   --amber:     #ffb547;
   --red:       #ff5f6d;
-  --text:      #e8edf5;
-  --muted:     #6b7a99;
-  --sidebar-w: 240px;
+
+  /* Text */
+  --text:      #eef3fb;
+  --muted:     #8493b0;
+  --faint:     #5d6c8a;
+
+  /* Gradients */
+  --grad-accent: linear-gradient(135deg, #00d4ff 0%, #7b61ff 100%);
+  --grad-cyan:   linear-gradient(135deg, #00e5a0 0%, #00d4ff 100%);
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 10px rgba(0,0,0,0.25);
+  --shadow-md:  0 12px 32px -8px rgba(0,0,0,0.55);
+  --shadow-lg:  0 28px 70px -20px rgba(0,0,0,0.7);
+  --shadow-glow: 0 0 0 1px rgba(0,212,255,0.18), 0 12px 40px -10px rgba(0,212,255,0.22);
+
+  --sidebar-w: 256px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { overflow-x: hidden; max-width: 100vw; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   font-family: var(--font-sans);
-  background: var(--bg) url("") center center / cover no-repeat fixed;
+  background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   min-height: 100vh;
+  font-weight: 450;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* Headings inherit the display face by default where used */
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+/* Tabular figures for any monospace data */
+.font-mono, [class*="-val"], [class*="-num"] { font-variant-numeric: tabular-nums; }
+
+::selection { background: rgba(0,212,255,0.28); color: #fff; }
+
+/* ── Custom scrollbars ──────────────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: rgba(123,97,255,0.4) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0,212,255,0.35), rgba(123,97,255,0.35));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0,212,255,0.6), rgba(123,97,255,0.6));
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }

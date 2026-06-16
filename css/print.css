@@ -1,7 +1,10 @@
-/* Print styles */
+/* Print / Export-PDF styles */
 @media print {
   .sidebar, .topbar, .ticker-bar, .mob-menu-btn { display: none !important; }
   .main { margin-left: 0 !important; }
-  .section { display: block !important; padding: 12px !important; }
+  .section { display: block !important; padding: 12px !important; max-width: none !important; }
+  .section.active > * { animation: none !important; }
   body { background: #fff !important; color: #000 !important; }
+  body::before, body::after { display: none !important; }
+  .card, .kpi { box-shadow: none !important; }
 }
