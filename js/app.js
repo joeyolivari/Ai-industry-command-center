@@ -40,6 +40,7 @@ function show(id, el) {
   document.getElementById(id).classList.add('active');
   if (el) el.classList.add('active');
   document.getElementById('pageTitle').textContent = titles[id] || id;
+  syncStoryFlow(id);
   // Close mobile sidebar if open
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.getElementById('mobOverlay');
@@ -57,6 +58,18 @@ function show(id, el) {
 }
 
 // ─── CHART HELPERS ─────────────────────────────────
+
+function syncStoryFlow(id) {
+  document.querySelectorAll('.story-step').forEach(step => {
+    const isActive = step.dataset.flowTarget === id;
+    step.classList.toggle('active', isActive);
+    step.setAttribute('aria-current', isActive ? 'step' : 'false');
+  });
+}
+
+function goFlow(id, el) {
+  show(id, document.querySelector('[data-nav="' + id + '"]'));
+}
 
 function getCtx(id) {
   const el = document.getElementById(id);

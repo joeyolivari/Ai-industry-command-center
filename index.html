@@ -126,13 +126,13 @@
   <!-- ══════════ MARKET OVERVIEW ══════════ -->
   <div id="market" class="section active">
 
-    <div class="story-rail" aria-label="Analysis story">
-      <div class="story-step active"><span>1</span>Size the market</div>
-      <div class="story-step"><span>2</span>Compare winners</div>
-      <div class="story-step"><span>3</span>Follow capital</div>
-      <div class="story-step"><span>4</span>Translate needs</div>
-      <div class="story-step"><span>5</span>Model the data</div>
-      <div class="story-step"><span>6</span>Export evidence</div>
+    <div class="story-rail" aria-label="Analysis process flow">
+      <button class="story-step active" data-flow-target="market" onclick="goFlow('market',this)"><span>1</span>Size market</button>
+      <button class="story-step" data-flow-target="companies" onclick="goFlow('companies',this)"><span>2</span>Compare winners</button>
+      <button class="story-step" data-flow-target="investment" onclick="goFlow('investment',this)"><span>3</span>Follow capital</button>
+      <button class="story-step" data-flow-target="simulator" onclick="goFlow('simulator',this)"><span>4</span>Translate needs</button>
+      <button class="story-step" data-flow-target="schema" onclick="goFlow('schema',this)"><span>5</span>Model data</button>
+      <button class="story-step" data-flow-target="downloads" onclick="goFlow('downloads',this)"><span>6</span>Export evidence</button>
     </div>
     <div class="section-story">
       <div class="story-question">How big is the AI opportunity, and why does it matter now?</div>
