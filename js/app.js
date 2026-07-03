@@ -20,7 +20,7 @@ function handleLogoClick() {
   btn.classList.add('clicking');
   setTimeout(function() {
     btn.classList.remove('clicking');
-    show('about', document.querySelector('[onclick*=about]'));
+    show('about');
   }, 420);
 }
 
@@ -67,6 +67,15 @@ function show(id, el) {
     document.getElementById('pageTitle').textContent = titles[id] || id;
     syncChapterRail(id);
     window.scrollTo({ top: 0, behavior: 'auto' });
+    // Charts must render after the section is actually visible — a hidden
+    // canvas has zero width and the draw code would divide against it.
+    if (['market','companies','investment','segments','trends'].includes(id)) {
+      setTimeout(() => { drawAll(id); initInteractivity(id); }, 60);
+    }
+    if (id === 'summary') {
+      document.getElementById('finalScore').textContent = baScore;
+      document.getElementById('finalBar').style.width = (baScore/360*100) + '%';
+    }
   };
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (document.startViewTransition && !reduceMotion) document.startViewTransition(swap);
@@ -77,13 +86,6 @@ function show(id, el) {
   if (sidebar.classList.contains('mobile-open')) {
     sidebar.classList.remove('mobile-open');
     overlay.classList.remove('visible');
-  }
-  if (['market','companies','investment','segments','trends'].includes(id)) {
-    setTimeout(() => { drawAll(id); initInteractivity(id); }, 60);
-  }
-  if (id === 'summary') {
-    document.getElementById('finalScore').textContent = baScore;
-    document.getElementById('finalBar').style.width = (baScore/360*100) + '%';
   }
 }
 
@@ -367,6 +369,7 @@ function donut(id, data, colors) {
   const { ctx, w, h } = r;
   const cx = w/2, cy = h/2;
   const ro = Math.min(cx, cy) - 12, ri = ro * 0.58;
+  if (ro <= 0) return; // canvas not laid out yet (hidden section)
   const total = data.reduce((a,b)=>a+b,0);
   let angle = -Math.PI/2;
   const gap = 0.03; // gap between slices in radians
