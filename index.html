@@ -21,61 +21,65 @@
 <nav class="sidebar">
   <div class="logo">
     <div class="logo-mark">
-      <button id="logoBtn" onclick="handleLogoClick()" title="About Joey Carbajo Olivari" style="width:48px;height:48px;border-radius:10px;background:rgba(123,97,255,0.08);border:1px solid rgba(123,97,255,0.15);cursor:pointer;padding:0;flex-shrink:0;position:relative;overflow:hidden;"><img src="assets/images/logos/joey-logo.jpg" alt="Home" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:10px;mix-blend-mode:screen;filter:brightness(1.05) contrast(1.0) saturate(1.1);transition:filter 0.25s,transform 0.25s;"></button>
+      <button id="logoBtn" type="button" onclick="handleLogoClick()" title="About Joey Carbajo Olivari"><img src="assets/images/logos/joey-logo.jpg" alt="About Joey Carbajo Olivari"></button>
       AI Command Center
     </div>
-    <div class="logo-sub" style="margin-top:6px;color:var(--accent);font-weight:600;font-size:11px;letter-spacing:0.5px">Research by Joey Carbajo Olivari</div>
-    <div class="logo-sub" style="margin-top:2px">Industry Intelligence · 2025–2026</div>
+    <div class="logo-sub researcher">Research by Joey Carbajo Olivari</div>
+    <div class="logo-sub">Industry Intelligence · 2025–2026</div>
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">Intelligence</div>
-    <div class="nav-item active" data-nav="market" onclick="show('market',this)">
+    <div class="nav-label">The Signal · Ch 1–4</div>
+    <button type="button" class="nav-item active" data-nav="market" aria-current="page" onclick="show('market',this)">
       <span class="nav-dot"></span> Market Overview
-    </div>
-    <div class="nav-item" data-nav="companies" onclick="show('companies',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="companies" onclick="show('companies',this)">
       <span class="nav-dot"></span> Company Intelligence
-    </div>
-    <div class="nav-item" data-nav="investment" onclick="show('investment',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="investment" onclick="show('investment',this)">
       <span class="nav-dot"></span> Investment & Funding
-    </div>
-    <div class="nav-item" data-nav="segments" onclick="show('segments',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="segments" onclick="show('segments',this)">
       <span class="nav-dot"></span> Sector Breakdown
-    </div>
-    <div class="nav-item" data-nav="trends" onclick="show('trends',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="trends" onclick="show('trends',this)">
       <span class="nav-dot"></span> Trends & Forecast
-    </div>
+    </button>
   </div>
 
   <div class="nav-section">
-    <div class="nav-label">Interactive</div>
-    <div class="nav-item" data-nav="simulator" onclick="show('simulator',this)">
+    <div class="nav-label">Translate & Model · Ch 5</div>
+    <button type="button" class="nav-item" data-nav="simulator" onclick="show('simulator',this)">
       <span class="nav-dot"></span> Stakeholder Sim
       <span class="nav-badge" id="navScore">0</span>
-    </div>
-    <div class="nav-item" data-nav="pipeline" onclick="show('pipeline',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="pipeline" onclick="show('pipeline',this)">
       <span class="nav-dot"></span> Data Pipeline
-    </div>
-    <div class="nav-item" data-nav="schema" onclick="show('schema',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="schema" onclick="show('schema',this)">
       <span class="nav-dot"></span> Star Schema
-    </div>
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Evidence & Outcome · Ch 6</div>
+    <button type="button" class="nav-item" data-nav="downloads" onclick="show('downloads',this)">
+      <span class="nav-dot"></span> Download Center
+      <span class="nav-badge nav-badge-dl">↓</span>
+    </button>
+    <button type="button" class="nav-item" data-nav="summary" onclick="show('summary',this)">
+      <span class="nav-dot"></span> Final Summary
+    </button>
   </div>
 
   <div class="nav-section">
     <div class="nav-label">Reference</div>
-    <div class="nav-item" data-nav="about" onclick="show('about',this)">
+    <button type="button" class="nav-item" data-nav="about" onclick="show('about',this)">
       <span class="nav-dot"></span> About This Project
-    </div>
-    <div class="nav-item" data-nav="jargon" onclick="show('jargon',this)">
+    </button>
+    <button type="button" class="nav-item" data-nav="jargon" onclick="show('jargon',this)">
       <span class="nav-dot"></span> Plain-English Guide
-    </div>
-    <div class="nav-item" data-nav="summary" onclick="show('summary',this)">
-      <span class="nav-dot"></span> Final Summary
-    </div>
-    <div class="nav-item" data-nav="downloads" onclick="show('downloads',this)">
-      <span class="nav-dot"></span> Download Center
-      <span class="nav-badge" style="background:var(--green);color:#000">↓</span>
-    </div>
+    </button>
   </div>
 
   <div class="sidebar-footer">
@@ -94,19 +98,19 @@
   <!-- TICKER -->
   <div class="ticker-bar" aria-label="Live AI market indicators">
     <div class="ticker-track">
-      <div class="ticker-item"><span class="t-name">AI Market 2025</span><span class="t-val">$542B</span><span class="t-up">▲ 38.5% CAGR</span></div>
-      <div class="ticker-item"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
       <div class="ticker-item"><span class="t-name">Anthropic ARR</span><span class="t-val">$30B</span><span class="t-up">▲ 80× in 18mo</span></div>
+      <div class="ticker-item"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
       <div class="ticker-item"><span class="t-name">US Private AI Investment 2024</span><span class="t-val">$109.1B</span><span class="t-up">▲ 12× China</span></div>
-      <div class="ticker-item"><span class="t-name">Global AI Forecast 2034</span><span class="t-val">$3.68T</span><span class="t-up">▲ 19.2% CAGR</span></div>
-      <div class="ticker-item"><span class="t-name">Enterprise AI Adoption 2024</span><span class="t-val">78%</span><span class="t-up">▲ from 55% in 2023</span></div>
+      <div class="ticker-item"><span class="t-name">NVIDIA Revenue FY2025</span><span class="t-val">$130B+</span><span class="t-up">▲ 122% YoY</span></div>
+      <div class="ticker-item"><span class="t-name">Claude Code ARR</span><span class="t-val">$1B</span><span class="t-up">▲ in 6 months</span></div>
+      <div class="ticker-item"><span class="t-name">MCP Protocol Installs</span><span class="t-val">97M</span><span class="t-up">▲ open standard</span></div>
       <!-- duplicate for seamless loop -->
-      <div class="ticker-item" aria-hidden="true"><span class="t-name">AI Market 2025</span><span class="t-val">$542B</span><span class="t-up">▲ 38.5% CAGR</span></div>
-      <div class="ticker-item" aria-hidden="true"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
       <div class="ticker-item" aria-hidden="true"><span class="t-name">Anthropic ARR</span><span class="t-val">$30B</span><span class="t-up">▲ 80× in 18mo</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">OpenAI ARR</span><span class="t-val">$25B</span><span class="t-up">▲ 580% vs 2023</span></div>
       <div class="ticker-item" aria-hidden="true"><span class="t-name">US Private AI Investment 2024</span><span class="t-val">$109.1B</span><span class="t-up">▲ 12× China</span></div>
-      <div class="ticker-item" aria-hidden="true"><span class="t-name">Global AI Forecast 2034</span><span class="t-val">$3.68T</span><span class="t-up">▲ 19.2% CAGR</span></div>
-      <div class="ticker-item" aria-hidden="true"><span class="t-name">Enterprise AI Adoption 2024</span><span class="t-val">78%</span><span class="t-up">▲ from 55% in 2023</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">NVIDIA Revenue FY2025</span><span class="t-val">$130B+</span><span class="t-up">▲ 122% YoY</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">Claude Code ARR</span><span class="t-val">$1B</span><span class="t-up">▲ in 6 months</span></div>
+      <div class="ticker-item" aria-hidden="true"><span class="t-name">MCP Protocol Installs</span><span class="t-val">97M</span><span class="t-up">▲ open standard</span></div>
     </div>
   </div>
 
@@ -118,10 +122,19 @@
       <span id="pageTitle">Market Overview</span>
     </div>
     <div class="topbar-right">
-      <button class="tb-btn" onclick="location.reload()">🔄 Refresh</button>
       <button class="tb-btn primary" onclick="window.print()">📥 Export PDF</button>
     </div>
   </div>
+
+  <!-- CHAPTER RAIL — the story spine, persistent across sections -->
+  <nav class="chapter-rail" id="chapterRail" aria-label="Analysis story chapters">
+    <button class="chapter-step active" data-chapter="1" onclick="show('market')"><span>1</span>Size the market</button>
+    <button class="chapter-step" data-chapter="2" onclick="show('companies')"><span>2</span>Compare winners</button>
+    <button class="chapter-step" data-chapter="3" onclick="show('investment')"><span>3</span>Follow capital</button>
+    <button class="chapter-step" data-chapter="4" onclick="show('segments')"><span>4</span>Read the trends</button>
+    <button class="chapter-step" data-chapter="5" onclick="show('simulator')"><span>5</span>Translate &amp; model</button>
+    <button class="chapter-step" data-chapter="6" onclick="show('downloads')"><span>6</span>Export evidence</button>
+  </nav>
 
   <!-- ══════════ MARKET OVERVIEW ══════════ -->
   <div id="market" class="section active">
@@ -132,8 +145,8 @@
         <h1 class="hero-title">Command the AI industry narrative before the board asks</h1>
         <p class="hero-sub">A business-intelligence console tracking market size, competitive revenue, capital flows, and sector growth — built the way a BA briefs a CEO: signal first, source always cited.</p>
         <div class="hero-actions">
-          <button class="hero-btn primary" onclick="show('simulator',document.querySelector('[data-nav=simulator]'))">▶ Run the Stakeholder Simulator</button>
-          <button class="hero-btn" onclick="show('schema',document.querySelector('[data-nav=schema]'))">View the Data Model →</button>
+          <button class="hero-btn primary" onclick="show('simulator')">▶ Run the Stakeholder Simulator</button>
+          <button class="hero-btn" onclick="show('schema')">View the Data Model →</button>
         </div>
       </div>
       <div class="hero-metrics">
@@ -143,35 +156,27 @@
       </div>
     </div>
 
-    <div class="story-rail" aria-label="Analysis story">
-      <div class="story-step active"><span>1</span>Size the market</div>
-      <div class="story-step"><span>2</span>Compare winners</div>
-      <div class="story-step"><span>3</span>Follow capital</div>
-      <div class="story-step"><span>4</span>Translate needs</div>
-      <div class="story-step"><span>5</span>Model the data</div>
-      <div class="story-step"><span>6</span>Export evidence</div>
-    </div>
     <div class="section-story">
       <div class="story-question">How big is the AI opportunity, and why does it matter now?</div>
       <div class="story-answer">Start with market size, enterprise adoption, and regional share before moving into competitors, capital flows, and data-product design.</div>
     </div>
     <div class="path-strip" aria-label="Quick paths">
-      <button class="path-card" onclick="show('companies',document.querySelector('[data-nav=companies]'))">
+      <button class="path-card" onclick="show('companies')">
         <span class="path-kicker">Compare</span>
         <span class="path-title">Company Signals</span>
         <span class="path-meta">ARR, valuations, positioning</span>
       </button>
-      <button class="path-card primary" onclick="show('simulator',document.querySelector('[data-nav=simulator]'))">
+      <button class="path-card primary" onclick="show('simulator')">
         <span class="path-kicker">Practice</span>
         <span class="path-title">Stakeholder Simulator</span>
         <span class="path-meta">Turn questions into BI outputs</span>
       </button>
-      <button class="path-card" onclick="show('downloads',document.querySelector('[data-nav=downloads]'))">
+      <button class="path-card" onclick="show('downloads')">
         <span class="path-kicker">Export</span>
         <span class="path-title">Source Data</span>
         <span class="path-meta">CSV files and dictionary</span>
       </button>
-      <button class="path-card" onclick="show('summary',document.querySelector('[data-nav=summary]'))">
+      <button class="path-card" onclick="show('summary')">
         <span class="path-kicker">Review</span>
         <span class="path-title">Executive Summary</span>
         <span class="path-meta">Portfolio-ready outcomes</span>
@@ -184,49 +189,24 @@
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2026',this)">2026</button>
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2030',this)">2030 est.</button>
       <button class="filter-chip" data-group="mkt-period" onclick="setMktPeriod('2034',this)">2034 est.</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-group-end">
         <span class="filter-label">Year Range</span>
         <div class="range-wrap">
           <span class="range-val">2019</span>
-          <input type="range" id="mktYearRange" min="0" max="6" value="6" step="1" oninput="onMktRange(this)">
+          <input type="range" id="mktYearRange" min="0" max="6" value="6" step="1" aria-label="Market size year range" oninput="onMktRange(this)">
           <span class="range-val" id="mktYearVal">2025</span>
         </div>
       </div>
     </div>
 
-    <div class="kpi-row" id="mktKpiRow">
-      <div class="kpi" style="--kpi-color: var(--accent)">
-        <div class="kpi-label">Global AI Market 2025</div>
-        <div class="kpi-val">$542B</div>
-        <div class="kpi-change up">▲ 38.5% CAGR to 2034</div>
-        <div class="kpi-sub">Source: Market.us / Grand View Research</div>
-      </div>
-      <div class="kpi" style="--kpi-color: var(--green)">
-        <div class="kpi-label">Enterprise AI Adoption</div>
-        <div class="kpi-val">78%</div>
-        <div class="kpi-change up">▲ from 55% in 2023</div>
-        <div class="kpi-sub">Stanford HAI AI Index 2025</div>
-      </div>
-      <div class="kpi" style="--kpi-color: var(--accent2)">
-        <div class="kpi-label">AI Forecast 2034</div>
-        <div class="kpi-val">$3.68T</div>
-        <div class="kpi-change up">▲ 19.2% CAGR</div>
-        <div class="kpi-sub">Precedence Research</div>
-      </div>
-      <div class="kpi" style="--kpi-color: var(--amber)">
-        <div class="kpi-label">N. America Market Share</div>
-        <div class="kpi-val">35.5%</div>
-        <div class="kpi-change neutral">Dominant region 2025</div>
-        <div class="kpi-sub">Grand View Research</div>
-      </div>
-    </div>
+    <!-- KPI row rendered by renderMktKPIs() so the period filter is the single source of truth -->
+    <div class="kpi-row" id="mktKpiRow"></div>
 
     <div class="grid-3-1">
       <!-- Market Size Trend -->
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Global AI Market Size Trajectory</div><div class="card-sub">Actual 2020–2025 · Forecast to 2034 (USD Billion)</div></div>
-          <span class="tag tag-blue">LINE</span>
         </div>
         <div class="chart-wrap"><canvas id="cMarket" height="240"></canvas></div>
       </div>
@@ -235,7 +215,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Regional Share 2025</div><div class="card-sub">% of global revenue</div></div>
-          <span class="tag tag-purple">PIE</span>
         </div>
         <div class="chart-wrap" style="margin-bottom:12px"><canvas id="cRegion" height="160"></canvas></div>
         <div class="donut-legend">
@@ -252,7 +231,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">AI Technology Market Share 2024</div><div class="card-sub">By technology segment (% revenue)</div></div>
-          <span class="tag tag-green">BAR</span>
         </div>
         <div class="hbar-list">
           <div class="hbar-item">
@@ -282,7 +260,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Deployment Mode Split 2025</div><div class="card-sub">Cloud vs On-Premise adoption</div></div>
-          <span class="tag tag-blue">AREA</span>
         </div>
         <div class="chart-wrap"><canvas id="cDeploy" height="220"></canvas></div>
       </div>
@@ -338,7 +315,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">AI Model Revenue Race</div><div class="card-sub">Annualized Run Rate (ARR) USD Billions · 2023–2026</div></div>
-          <span class="tag tag-blue">MULTI-LINE</span>
         </div>
         <div class="chart-wrap"><canvas id="cRevRace" height="260"></canvas></div>
       </div>
@@ -366,9 +342,9 @@
             <div class="hbar-track"><div class="hbar-fill" style="width:0.7%;background:var(--amber)"></div></div>
           </div>
         </div>
-        <div style="margin-top:16px; padding:12px; background:rgba(0,229,160,0.06); border-radius:8px; border:1px solid rgba(0,229,160,0.15)">
-          <div style="font-size:11px;color:var(--green);font-weight:700;margin-bottom:4px">KEY INSIGHT</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6">Anthropic surpassed OpenAI in ARR for the first time in April 2026. Enterprise focus (70-80% revenue from B2B) drove 80× growth from $87M (early 2024) to $30B.</div>
+        <div class="insight-note">
+          <div class="insight-note-label">Key Insight</div>
+          <div class="insight-note-text">Anthropic surpassed OpenAI in ARR for the first time in April 2026. Enterprise focus (70-80% revenue from B2B) drove 80× growth from $87M (early 2024) to $30B.</div>
         </div>
       </div>
     </div>
@@ -377,7 +353,6 @@
     <div class="card">
       <div class="card-header">
         <div><div class="card-title">AI Company Intelligence Directory</div><div class="card-sub">Real data · April–May 2026</div></div>
-        <span class="tag tag-green">TABLE</span>
       </div>
       <div class="co-table-wrap"><table class="co-table">
         <thead>
@@ -474,11 +449,11 @@
       <button class="filter-chip active" data-group="inv-view" onclick="setInvFilter('total',this)">Total Investment</button>
       <button class="filter-chip" data-group="inv-view" onclick="setInvFilter('genai',this)">GenAI Only</button>
       <button class="filter-chip" data-group="inv-view" onclick="setInvFilter('geo',this)">By Geography</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-group-end">
         <span class="filter-label">Year</span>
         <div class="range-wrap">
           <span class="range-val">2019</span>
-          <input type="range" id="invYearRange" min="0" max="6" value="6" step="1" oninput="onInvRange(this)">
+          <input type="range" id="invYearRange" min="0" max="6" value="6" step="1" aria-label="Investment year range" oninput="onInvRange(this)">
           <span class="range-val" id="invYearVal">2025</span>
         </div>
       </div>
@@ -514,7 +489,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Annual AI Investment Trend (USD Billions)</div><div class="card-sub">Global private AI funding 2019–2025</div></div>
-          <span class="tag tag-green">BAR</span>
         </div>
         <div class="chart-wrap"><canvas id="cInvest" height="240"></canvas></div>
       </div>
@@ -522,7 +496,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Funding by Category 2024</div><div class="card-sub">% of total AI investment</div></div>
-          <span class="tag tag-purple">DONUT</span>
         </div>
         <div class="chart-wrap" style="margin-bottom:12px"><canvas id="cFundCat" height="200"></canvas></div>
         <div class="hbar-list">
@@ -624,7 +597,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">AI Revenue by End-Use Vertical</div><div class="card-sub">Market share % · 2025</div></div>
-          <span class="tag tag-blue">BAR</span>
         </div>
         <div class="chart-wrap"><canvas id="cVertical" height="300"></canvas></div>
       </div>
@@ -632,7 +604,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">AI Component Breakdown</div><div class="card-sub">Hardware vs Software vs Services</div></div>
-          <span class="tag tag-purple">STACKED</span>
         </div>
         <div class="chart-wrap"><canvas id="cComponent" height="260"></canvas></div>
       </div>
@@ -690,11 +661,11 @@
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('openai',this)">OpenAI</button>
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('xai',this)">xAI</button>
       <button class="filter-chip" data-group="tr-company" onclick="setTrendFilter('all',this)">All</button>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <div class="filter-group-end">
         <span class="filter-label">From</span>
         <div class="range-wrap">
           <span class="range-val">Jan'24</span>
-          <input type="range" id="trendRange" min="0" max="10" value="0" step="1" oninput="onTrendRange(this)">
+          <input type="range" id="trendRange" min="0" max="10" value="0" step="1" aria-label="Trend start date" oninput="onTrendRange(this)">
           <span class="range-val" id="trendRangeVal">Apr'26</span>
         </div>
       </div>
@@ -731,7 +702,6 @@
       <div class="card">
         <div class="card-header">
           <div><div class="card-title">Anthropic Revenue Trajectory</div><div class="card-sub">Annualized Run Rate (ARR) — actual disclosed data (USD Billions)</div></div>
-          <span class="tag tag-green">AREA</span>
         </div>
         <div class="chart-wrap"><canvas id="cAnthro" height="250"></canvas></div>
       </div>
@@ -820,33 +790,33 @@
           </div>
         </div>
         <div class="sim-chips" id="stakeholderList">
-          <div class="sim-chip" data-id="ceo" onclick="pickStakeholder('ceo')">🏢 CEO</div>
-          <div class="sim-chip" data-id="investor" onclick="pickStakeholder('investor')">💼 VC Investor</div>
-          <div class="sim-chip" data-id="product" onclick="pickStakeholder('product')">🧪 Product Manager</div>
-          <div class="sim-chip" data-id="risk" onclick="pickStakeholder('risk')">⚠️ Risk Manager</div>
-          <div class="sim-chip" data-id="sales" onclick="pickStakeholder('sales')">🤝 Enterprise Sales</div>
-          <div class="sim-chip" data-id="data" onclick="pickStakeholder('data')">🔬 Data Scientist</div>
+          <button type="button" class="sim-chip" data-id="ceo" onclick="pickStakeholder('ceo')">🏢 CEO</button>
+          <button type="button" class="sim-chip" data-id="investor" onclick="pickStakeholder('investor')">💼 VC Investor</button>
+          <button type="button" class="sim-chip" data-id="product" onclick="pickStakeholder('product')">🧪 Product Manager</button>
+          <button type="button" class="sim-chip" data-id="risk" onclick="pickStakeholder('risk')">⚠️ Risk Manager</button>
+          <button type="button" class="sim-chip" data-id="sales" onclick="pickStakeholder('sales')">🤝 Enterprise Sales</button>
+          <button type="button" class="sim-chip" data-id="data" onclick="pickStakeholder('data')">🔬 Data Scientist</button>
         </div>
         <div id="simContent">
-          <div style="text-align:center;padding:40px;color:var(--muted)">
-            <div style="font-size:40px;margin-bottom:12px">☝️</div>
-            <div style="font-weight:600;margin-bottom:6px">Select a stakeholder to begin</div>
-            <div style="font-size:12px">Each has a vague AI-industry request. Identify the right metrics, sources, and dashboard.</div>
+          <div class="empty-state">
+            <div class="empty-state-icon">☝️</div>
+            <div class="empty-state-title">Select a stakeholder to begin</div>
+            <div class="empty-state-text">Each has a vague AI-industry request. Identify the right metrics, sources, and dashboard.</div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px">Simulation Progress</div>
+        <div class="card-title score-panel-title">Simulation Progress</div>
         <div id="progressList">
-          <div style="font-size:12px;color:var(--muted)">Complete all 6 scenarios to earn full marks.</div>
+          <div class="score-panel-hint">Complete all 6 scenarios to earn full marks.</div>
         </div>
-        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
-          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Score Progress</div>
-          <div style="background:rgba(255,255,255,0.06);border-radius:3px;height:8px;overflow:hidden">
-            <div id="scoreBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:3px;transition:width 0.5s"></div>
+        <div class="score-progress">
+          <div class="score-progress-label">Score Progress</div>
+          <div class="score-track">
+            <div id="scoreBar" class="score-fill"></div>
           </div>
-          <div style="font-size:11px;color:var(--muted);margin-top:6px" id="scoreText">0 / 360 points</div>
+          <div class="score-progress-text" id="scoreText">0 / 360 points</div>
         </div>
       </div>
     </div>
@@ -874,7 +844,7 @@
         <div class="pipe-stage"><div class="pipe-icon">📊</div><div class="pipe-name">Dashboard</div><div class="pipe-desc">KPIs · Charts</div></div>
       </div></div><!-- pipeline-scroll-wrap -->
 
-      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px">AI Industry Source Systems</div>
+      <div class="sub-label">AI Industry Source Systems</div>
       <div class="sources-grid">
         <div class="source-tile">🏛️ Stanford HAI Index</div>
         <div class="source-tile">📈 Epoch AI Revenue DB</div>
@@ -886,7 +856,7 @@
         <div class="source-tile">🌐 Company Press Releases</div>
       </div>
 
-      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px">Transformation Rules</div>
+      <div class="sub-label">Transformation Rules</div>
       <div class="rules-grid">
         <div class="rule-row"><div class="rule-ck">✓</div><span>Normalize ARR / MRR / Annual to single currency (USD)</span></div>
         <div class="rule-row"><div class="rule-ck">✓</div><span>Standardize company names across sources</span></div>
@@ -947,7 +917,7 @@
 
     <div class="card">
       <div class="card-header"><div class="card-title">Model Specifications</div></div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <div class="table-scroll">
       <table class="data-table">
         <thead><tr><th>Table</th><th>Type</th><th>Key</th><th>Grain</th><th>Source</th></tr></thead>
         <tbody>
@@ -1184,30 +1154,30 @@
     <!-- Quick reference table -->
     <div class="card">
       <div class="block-label">Quick Reference</div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-      <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:480px">
+      <div class="table-scroll">
+      <table class="ref-table">
         <thead>
-          <tr style="border-bottom:1px solid var(--border)">
-            <th style="text-align:left;padding:8px 12px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700">Term</th>
-            <th style="text-align:left;padding:8px 12px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700">Plain English</th>
+          <tr>
+            <th>Term</th>
+            <th>Plain English</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent);font-size:11px">KPI</td><td style="padding:10px 12px;color:var(--muted)">The scorecard number that tells you if something is working</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent2);font-size:11px">Stakeholder</td><td style="padding:10px 12px;color:var(--muted)">The person or team who needs the answer</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent);font-size:11px">Dashboard</td><td style="padding:10px 12px;color:var(--muted)">A visual page that turns data into decisions</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--amber);font-size:11px">Forecast</td><td style="padding:10px 12px;color:var(--muted)">An educated estimate about what may happen next</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent);font-size:11px">ARR</td><td style="padding:10px 12px;color:var(--muted)">Annual recurring revenue — how much a company earns per year on subscription</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--green);font-size:11px">CAGR</td><td style="padding:10px 12px;color:var(--muted)">The average growth rate over time, smoothed out year by year</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent2);font-size:11px">Confidence Level</td><td style="padding:10px 12px;color:var(--muted)">How much trust to place in a number or source</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--amber);font-size:11px">Reconciliation</td><td style="padding:10px 12px;color:var(--muted)">Comparing numbers from different sources to make sure they line up</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent);font-size:11px">Data Pipeline</td><td style="padding:10px 12px;color:var(--muted)">The path data takes from raw source to clean dashboard</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent2);font-size:11px">ETL</td><td style="padding:10px 12px;color:var(--muted)">Extract, Transform, Load — collect the data, clean it, place it where it can be used</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--green);font-size:11px">Source System</td><td style="padding:10px 12px;color:var(--muted)">Where the data originally comes from</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--amber);font-size:11px">Data Quality</td><td style="padding:10px 12px;color:var(--muted)">Checking whether data is accurate, complete, consistent, and trustworthy</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent);font-size:11px">Star Schema</td><td style="padding:10px 12px;color:var(--muted)">A clean way to organize data so dashboards can filter and calculate properly</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--accent2);font-size:11px">Fact Table</td><td style="padding:10px 12px;color:var(--muted)">The main table with the numbers we measure</td></tr>
-          <tr><td style="padding:10px 12px;font-family:var(--font-mono);color:var(--green);font-size:11px">Dimension Table</td><td style="padding:10px 12px;color:var(--muted)">The lookup tables that explain the numbers — company, region, date, segment</td></tr>
+          <tr><td class="ref-term accent">KPI</td><td>The scorecard number that tells you if something is working</td></tr>
+          <tr><td class="ref-term accent2">Stakeholder</td><td>The person or team who needs the answer</td></tr>
+          <tr><td class="ref-term accent">Dashboard</td><td>A visual page that turns data into decisions</td></tr>
+          <tr><td class="ref-term amber">Forecast</td><td>An educated estimate about what may happen next</td></tr>
+          <tr><td class="ref-term accent">ARR</td><td>Annual recurring revenue — how much a company earns per year on subscription</td></tr>
+          <tr><td class="ref-term green">CAGR</td><td>The average growth rate over time, smoothed out year by year</td></tr>
+          <tr><td class="ref-term accent2">Confidence Level</td><td>How much trust to place in a number or source</td></tr>
+          <tr><td class="ref-term amber">Reconciliation</td><td>Comparing numbers from different sources to make sure they line up</td></tr>
+          <tr><td class="ref-term accent">Data Pipeline</td><td>The path data takes from raw source to clean dashboard</td></tr>
+          <tr><td class="ref-term accent2">ETL</td><td>Extract, Transform, Load — collect the data, clean it, place it where it can be used</td></tr>
+          <tr><td class="ref-term green">Source System</td><td>Where the data originally comes from</td></tr>
+          <tr><td class="ref-term amber">Data Quality</td><td>Checking whether data is accurate, complete, consistent, and trustworthy</td></tr>
+          <tr><td class="ref-term accent">Star Schema</td><td>A clean way to organize data so dashboards can filter and calculate properly</td></tr>
+          <tr><td class="ref-term accent2">Fact Table</td><td>The main table with the numbers we measure</td></tr>
+          <tr><td class="ref-term green">Dimension Table</td><td>The lookup tables that explain the numbers — company, region, date, segment</td></tr>
         </tbody>
       </table>
       </div>
@@ -1240,30 +1210,30 @@
     <div class="grid-2">
       <div class="card">
         <div class="card-title" style="margin-bottom:16px">Project Components</div>
-        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <div class="table-scroll">
         <table class="data-table">
           <tbody>
-            <tr><td>📊 Dashboards</td><td style="text-align:right;font-weight:700">5</td></tr>
-            <tr><td>📈 KPIs Tracked</td><td style="text-align:right;font-weight:700">20+</td></tr>
-            <tr><td>🏢 Companies Profiled</td><td style="text-align:right;font-weight:700">8</td></tr>
-            <tr><td>🎯 Stakeholder Scenarios</td><td style="text-align:right;font-weight:700">6</td></tr>
-            <tr><td>🗄️ Data Sources</td><td style="text-align:right;font-weight:700">8</td></tr>
-            <tr><td>⭐ Dimension Tables</td><td style="text-align:right;font-weight:700">7</td></tr>
-            <tr><td>⚙️ Transform Rules</td><td style="text-align:right;font-weight:700">8</td></tr>
-            <tr><td>📅 Data Coverage</td><td style="text-align:right;font-weight:700">2019–2026</td></tr>
+            <tr><td>📊 Dashboards</td><td class="td-num">5</td></tr>
+            <tr><td>📈 KPIs Tracked</td><td class="td-num">20+</td></tr>
+            <tr><td>🏢 Companies Profiled</td><td class="td-num">8</td></tr>
+            <tr><td>🎯 Stakeholder Scenarios</td><td class="td-num">6</td></tr>
+            <tr><td>🗄️ Data Sources</td><td class="td-num">8</td></tr>
+            <tr><td>⭐ Dimension Tables</td><td class="td-num">7</td></tr>
+            <tr><td>⚙️ Transform Rules</td><td class="td-num">8</td></tr>
+            <tr><td>📅 Data Coverage</td><td class="td-num">2019–2026</td></tr>
           </tbody>
         </table>
         </div>
       </div>
       <div class="card">
-        <div class="card-title" style="margin-bottom:16px">Your BA Score</div>
-        <div style="text-align:center;padding:20px">
-          <div style="font-family:var(--font-display);font-size:56px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent" id="finalScore">0</div>
-          <div style="font-size:13px;color:var(--muted);margin-top:6px">out of 360 possible points</div>
-          <div style="background:rgba(255,255,255,0.06);border-radius:4px;height:8px;overflow:hidden;margin:16px 0">
-            <div id="finalBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:4px;transition:width 0.5s"></div>
+        <div class="card-title score-panel-title">Your BA Score</div>
+        <div class="score-panel">
+          <div class="score-panel-num" id="finalScore">0</div>
+          <div class="score-panel-sub">out of 360 possible points</div>
+          <div class="score-track">
+            <div id="finalBar" class="score-fill"></div>
           </div>
-          <div style="font-size:12px;color:var(--muted)">Complete all 6 stakeholder scenarios to maximize score</div>
+          <div class="score-panel-hint">Complete all 6 stakeholder scenarios to maximize score</div>
         </div>
       </div>
     </div>
@@ -1283,14 +1253,14 @@
         <div class="dl-hero-title">Download Center</div>
         <div class="dl-hero-sub">All datasets and documentation powering this AI Industry Intelligence platform. Every CSV is generated directly from the real data in the dashboards. Download, open in Excel or Google Sheets, and build on the analysis.</div>
       </div>
-      <div style="text-align:right;flex-shrink:0">
-        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Total Files</div>
-        <div style="font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--green)">8</div>
-        <div style="font-size:10px;color:var(--muted)">available</div>
+      <div class="dl-hero-stat">
+        <div class="dl-hero-stat-label">Total Files</div>
+        <div class="dl-hero-stat-num">8</div>
+        <div class="dl-hero-stat-sub">available</div>
       </div>
     </div>
 
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px">📊 Dataset Exports — CSV</div>
+    <div class="sub-label">📊 Dataset Exports — CSV</div>
     <div class="dl-grid">
       <div class="dl-card" style="border-top:2px solid var(--green)">
         <div class="dl-icon">🌐</div>
@@ -1336,7 +1306,7 @@
       </div>
     </div>
 
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px;margin-top:8px">📄 Reports & Documentation</div>
+    <div class="sub-label">📄 Reports & Documentation</div>
     <div class="dl-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
       <div class="dl-card" style="border-top:2px solid var(--red)">
         <div class="dl-icon">📋</div>
@@ -1358,9 +1328,8 @@
     <div class="card">
       <div class="card-header">
         <div><div class="card-title">Data Dictionary Preview</div><div class="card-sub">Field definitions · data types · sources · confidence levels</div></div>
-        <span class="tag tag-green">REFERENCE</span>
       </div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <div class="table-scroll">
       <table class="dict-table">
         <thead><tr><th>Field</th><th>Type</th><th>Description</th><th>Source</th><th>Confidence</th></tr></thead>
         <tbody>

@@ -4,7 +4,6 @@
 
 /* Tablet / small desktop */
 @media (max-width: 1100px) {
-  .story-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .section-story { grid-template-columns: minmax(0,1fr); gap: 10px; }
   .path-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -17,7 +16,7 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-  :root { --sidebar-w: 0px; }
+  :root { --sidebar-w: 0px; --topbar-h: 58px; }
 
   .sidebar {
     transform: translateX(-100%);
@@ -38,8 +37,6 @@
   .tb-btn { padding: 7px 11px; font-size: 11px; }
 
   /* Generous, readable story framing */
-  .story-rail { grid-template-columns: minmax(0,1fr); gap: 6px; }
-  .story-step { min-height: 36px; padding: 10px 12px; }
   .section-story { padding: 16px 16px; margin-bottom: 14px; }
   .story-question { font-size: 16px; }
   .story-answer { font-size: 13px; }
@@ -56,6 +53,19 @@
   /* Ticker scrolls on its own; allow gentle nudge if needed */
   .ticker-bar { padding: 7px 0; }
   .ticker-track { animation-duration: 30s; }
+
+  /* Chapter rail: swipeable strip; steps keep their natural width */
+  .chapter-rail { padding: 8px 12px; gap: 4px; }
+  .chapter-step { flex: 0 0 auto; min-height: 40px; padding: 8px 12px; }
+  .chapter-step:not(:first-child)::before { width: 10px; margin-right: 6px; }
+
+  /* Comfortable touch targets for filters and chips */
+  .filter-chip { padding: 9px 16px; min-height: 38px; }
+  .filter-bar { padding: 10px 12px; }
+  .filter-group-end { margin-left: 0; width: 100%; }
+
+  /* Forward CTA stays readable and tappable */
+  .next-chapter { padding: 18px 18px; margin-top: 20px; }
 
   .mob-menu-btn { display: flex !important; }
   .mob-overlay { display: block !important; }

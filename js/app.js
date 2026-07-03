@@ -34,12 +34,43 @@ function toggleMobileNav() {
 
 // ─── NAVIGATION ────────────────────────────────────
 
+// The story spine: sections in reading order. About/Jargon are the epilogue.
+const STORY_FLOW = ['market','companies','investment','segments','trends','simulator','pipeline','schema','downloads','summary','about','jargon'];
+
+// Which chapter of the rail each section belongs to (about/jargon: none).
+const CHAPTER_OF = {
+  market: 1, companies: 2, investment: 3, segments: 4, trends: 4,
+  simulator: 5, pipeline: 5, schema: 5, downloads: 6, summary: 6
+};
+
+function syncChapterRail(id) {
+  const ch = CHAPTER_OF[id];
+  document.querySelectorAll('.chapter-step').forEach(step => {
+    const n = parseInt(step.dataset.chapter, 10);
+    step.classList.toggle('active', n === ch);
+    step.classList.toggle('passed', ch !== undefined && n < ch);
+    if (n === ch) step.setAttribute('aria-current', 'step');
+    else step.removeAttribute('aria-current');
+  });
+}
+
 function show(id, el) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (el) el.classList.add('active');
-  document.getElementById('pageTitle').textContent = titles[id] || id;
+  el = el || document.querySelector(`[data-nav="${id}"]`);
+  const swap = () => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => {
+      n.classList.remove('active');
+      n.removeAttribute('aria-current');
+    });
+    document.getElementById(id).classList.add('active');
+    if (el) { el.classList.add('active'); el.setAttribute('aria-current', 'page'); }
+    document.getElementById('pageTitle').textContent = titles[id] || id;
+    syncChapterRail(id);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (document.startViewTransition && !reduceMotion) document.startViewTransition(swap);
+  else swap();
   // Close mobile sidebar if open
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.getElementById('mobOverlay');
@@ -54,6 +85,26 @@ function show(id, el) {
     document.getElementById('finalScore').textContent = baScore;
     document.getElementById('finalBar').style.width = (baScore/360*100) + '%';
   }
+}
+
+// Every section ends with a forward action so the page reads as one
+// continuous case study instead of a widget grid.
+function buildNextChapterCTAs() {
+  STORY_FLOW.forEach((id, i) => {
+    const next = STORY_FLOW[(i + 1) % STORY_FLOW.length];
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    let kicker = 'Continue the story';
+    if (id === 'summary') kicker = 'Epilogue';
+    if (id === 'about') kicker = 'Reference';
+    if (id === 'jargon') kicker = 'Restart the tour';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'next-chapter';
+    btn.innerHTML = `<span class="next-kicker">${kicker}</span><span class="next-title">${titles[next]}<span class="next-arrow">→</span></span>`;
+    btn.addEventListener('click', () => show(next));
+    sec.appendChild(btn);
+  });
 }
 
 // ─── CHART HELPERS ─────────────────────────────────
@@ -741,6 +792,8 @@ function initInteractivity(section){
 }
 
 window.addEventListener('load', () => {
+  buildNextChapterCTAs();
+  renderMktKPIs();
   drawAll('market');
   updateProgress();
   setTimeout(()=>initInteractivity('market'),100);

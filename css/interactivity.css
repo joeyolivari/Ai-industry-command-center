@@ -47,6 +47,12 @@
 }
 .range-val { font-family: var(--font-mono); font-size: 11px; color: var(--accent); font-weight: 700; white-space: nowrap; }
 
+/* Right-aligned group inside a filter bar (year sliders etc.) */
+.filter-group-end {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+}
+
 .kpi-compare-toggle {
   display: flex; gap: 0; border: 1px solid var(--border2); border-radius: 8px; overflow: hidden;
   margin-bottom: 16px; width: fit-content;

@@ -53,7 +53,13 @@ function submitSim() {
   if (!currentSim) return;
   const s = sims[currentSim];
   const cats = ['goal','kpi','sources','segments','sme','output'];
-  if (cats.some(c => currentSelections[c] === undefined)) { alert('Please make all 6 selections.'); return; }
+  if (cats.some(c => currentSelections[c] === undefined)) {
+    const fb = document.getElementById('fb');
+    fb.className = 'feedback err show';
+    fb.innerHTML = '<div class="feedback-title">⚠️ Almost there</div>Make a selection in all 6 categories before submitting — a BA never files a half-scoped requirement.';
+    fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   let pts = 0;
   const corr = {};
@@ -115,9 +121,9 @@ function updateProgress() {
   const names = { ceo:'CEO', investor:'VC Investor', product:'Product Mgr', risk:'Risk Mgr', sales:'Enterprise Sales', data:'Data Scientist' };
   const list = document.getElementById('progressList');
   list.innerHTML = Object.keys(sims).map(id => `
-  <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px">
-    <span style="color:${completedSims.has(id)?'var(--green)':'var(--muted)'}">${names[id]}</span>
-    <span style="font-family:var(--font-mono);color:${completedSims.has(id)?'var(--green)':'var(--muted)'}">${completedSims.has(id)?'✓ Done':'—'}</span>
+  <div class="prog-row${completedSims.has(id) ? ' done' : ''}">
+    <span>${names[id]}</span>
+    <span class="prog-mark">${completedSims.has(id) ? '✓ Done' : '—'}</span>
   </div>`).join('');
 }
 
