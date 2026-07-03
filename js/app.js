@@ -117,15 +117,15 @@ function lineChart(id, labels, datasets, opts={}) {
   grid(ctx, w, h, pad);
 
   // y-axis labels
-  ctx.fillStyle = C.muted; ctx.font = '10px var(--font-mono)'; ctx.textAlign = 'right';
+  ctx.fillStyle = C.muted; ctx.font = "10px 'JetBrains Mono', monospace"; ctx.textAlign = 'right';
   for (let i = 0; i <= 4; i++) {
-    const val = min + range * (1 - i/4);
+    const val = Math.round(min + range * (1 - i/4));
     const y = pad + ch * i / 4;
     ctx.fillText(opts.fmt ? opts.fmt(val) : val.toFixed(0), pad - 8, y + 4);
   }
 
   // x-axis labels
-  ctx.textAlign = 'center'; ctx.fillStyle = C.muted; ctx.font = '10px var(--font-sans)';
+  ctx.textAlign = 'center'; ctx.fillStyle = C.muted; ctx.font = "10px 'Manrope', sans-serif";
   labels.forEach((l, i) => {
     const x = pad + cw * i / (labels.length - 1);
     ctx.fillText(l, x, h - 6);
@@ -201,7 +201,7 @@ function lineChart(id, labels, datasets, opts={}) {
       ctx.fillStyle = color;
       ctx.beginPath(); ctx.arc(lx + 5, 10, 3.5, 0, Math.PI*2); ctx.fill();
       // label
-      ctx.fillStyle = C.text; ctx.textAlign = 'left'; ctx.font = '10px var(--font-sans)';
+      ctx.fillStyle = C.text; ctx.textAlign = 'left'; ctx.font = "10px 'Manrope', sans-serif";
       ctx.fillText(lbl, lx + 13, 14);
       lx += tw + 32;
     });
@@ -221,9 +221,9 @@ function barChart(id, labels, data, colors, opts={}) {
   grid(ctx, w, h, pad);
 
   // y-axis labels
-  ctx.fillStyle = C.muted; ctx.font = '10px var(--font-mono)'; ctx.textAlign = 'right';
+  ctx.fillStyle = C.muted; ctx.font = "10px 'JetBrains Mono', monospace"; ctx.textAlign = 'right';
   for (let i = 0; i <= 4; i++) {
-    const val = max * (1 - i/4);
+    const val = Math.round(max * (1 - i/4));
     const y = pad + ch * i / 4;
     ctx.fillText(opts.fmt ? opts.fmt(val) : val.toFixed(0), pad - 8, y + 4);
   }
@@ -262,12 +262,12 @@ function barChart(id, labels, data, colors, opts={}) {
     // Value label above bar
     ctx.save();
     ctx.shadowColor = color; ctx.shadowBlur = 8;
-    ctx.fillStyle = C.text; ctx.font = 'bold 10px var(--font-mono)'; ctx.textAlign = 'center';
+    ctx.fillStyle = C.text; ctx.font = "bold 10px 'JetBrains Mono', monospace"; ctx.textAlign = 'center';
     ctx.fillText(opts.fmt ? opts.fmt(v) : v, x + bw/2, y - 7);
     ctx.restore();
 
     // x-axis label
-    ctx.fillStyle = C.muted; ctx.font = '10px var(--font-sans)';
+    ctx.fillStyle = C.muted; ctx.font = "10px 'Manrope', sans-serif";
     if (many) {
       ctx.save(); ctx.translate(x + bw/2, h - bottomPad + 14);
       ctx.rotate(-Math.PI/5); ctx.textAlign = 'right';
@@ -424,12 +424,12 @@ function lineCI(id, labels, datasets, opts={}) {
   const rng=max-min||1;
   grid(ctx,w,h,pad);
 
-  ctx.fillStyle=C.muted; ctx.font='10px var(--font-mono)'; ctx.textAlign='right';
+  ctx.fillStyle=C.muted; ctx.font="10px 'JetBrains Mono', monospace"; ctx.textAlign='right';
   for(let i=0;i<=4;i++){
-    const v=min+rng*(1-i/4), y=pad+ch*i/4;
+    const v=Math.round(min+rng*(1-i/4)), y=pad+ch*i/4;
     ctx.fillText(opts.fmt?opts.fmt(v):v.toFixed(0), pad-8, y+4);
   }
-  ctx.textAlign='center'; ctx.fillStyle=C.muted; ctx.font='10px var(--font-sans)';
+  ctx.textAlign='center'; ctx.fillStyle=C.muted; ctx.font="10px 'Manrope', sans-serif";
   labels.forEach((l,i)=>{ const x=pad+cw*i/(labels.length-1); ctx.fillText(l,x,h-6); });
 
   const byX={};
@@ -473,7 +473,7 @@ function lineCI(id, labels, datasets, opts={}) {
       if(ctx.roundRect) ctx.roundRect(lx-4,2,tw+22,16,4); else ctx.rect(lx-4,2,tw+22,16);
       ctx.fill();
       ctx.fillStyle=col; ctx.beginPath(); ctx.arc(lx+5,10,3.5,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle=C.text; ctx.textAlign='left'; ctx.font='10px var(--font-sans)';
+      ctx.fillStyle=C.text; ctx.textAlign='left'; ctx.font="10px 'Manrope', sans-serif";
       ctx.fillText(lbl,lx+13,14); lx+=tw+32;
     });
   }
@@ -490,9 +490,9 @@ function barCI(id, labels, data, colors, opts={}) {
   grid(ctx,w,h,pad);
 
   // y-axis labels
-  ctx.fillStyle=C.muted; ctx.font='10px var(--font-mono)'; ctx.textAlign='right';
+  ctx.fillStyle=C.muted; ctx.font="10px 'JetBrains Mono', monospace"; ctx.textAlign='right';
   for(let i=0;i<=4;i++){
-    const v=max*(1-i/4), y=pad+ch*i/4;
+    const v=Math.round(max*(1-i/4)), y=pad+ch*i/4;
     ctx.fillText(opts.fmt?opts.fmt(v):v.toFixed(0), pad-8, y+4);
   }
 
@@ -520,11 +520,11 @@ function barCI(id, labels, data, colors, opts={}) {
 
     // value label
     ctx.save(); ctx.shadowColor=color; ctx.shadowBlur=8;
-    ctx.fillStyle=C.text; ctx.font='bold 10px var(--font-mono)'; ctx.textAlign='center';
+    ctx.fillStyle=C.text; ctx.font="bold 10px 'JetBrains Mono', monospace"; ctx.textAlign='center';
     ctx.fillText(opts.fmt?opts.fmt(v):v, x+bw/2, y-7); ctx.restore();
 
     // x label
-    ctx.fillStyle=C.muted; ctx.font='10px var(--font-sans)';
+    ctx.fillStyle=C.muted; ctx.font="10px 'Manrope', sans-serif";
     if(many){
       ctx.save(); ctx.translate(x+bw/2,h-bottomPad+14); ctx.rotate(-Math.PI/5); ctx.textAlign='right';
       ctx.fillText(labels[i],0,0); ctx.restore();
