@@ -969,21 +969,20 @@
   <div id="about" class="section">
 
     <!-- Hero banner -->
-    <div style="background:linear-gradient(135deg,rgba(0,212,255,0.07) 0%,rgba(123,97,255,0.10) 100%);border:1px solid rgba(0,212,255,0.18);border-radius:16px;padding:40px 40px 36px;margin-bottom:24px;position:relative;overflow:hidden">
-      <div style="position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(0,212,255,0.12) 0%,transparent 70%);pointer-events:none"></div>
-      <div style="display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap">
-        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:28px;font-weight:800;color:#000;flex-shrink:0">JO</div>
+    <div class="profile-hero">
+      <div class="profile-hero-body">
+        <div class="profile-avatar">JO</div>
         <div style="flex:1;min-width:260px">
-          <div style="font-family:var(--font-display);font-size:24px;font-weight:800;margin-bottom:4px">Joey Carbajo Olivari</div>
-          <div style="font-size:13px;color:var(--accent);font-weight:600;letter-spacing:0.3px;margin-bottom:6px">Business Analyst · Process Improvement · Data & AI</div>
-          <div style="font-size:13px;line-height:1.85;color:var(--muted);margin-top:12px;max-width:620px">
+          <div class="profile-name">Joey Carbajo Olivari</div>
+          <div class="profile-role">Business Analyst · Process Improvement · Data &amp; AI</div>
+          <div class="profile-summary">
             I built this project to show how I think through messy business questions, real data, stakeholder needs, and dashboard design. My background is in reporting, process improvement, data quality, and working with stakeholders to turn unclear requirements into something useful.
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-            <span style="padding:4px 12px;border-radius:20px;border:1px solid rgba(0,212,255,0.25);background:rgba(0,212,255,0.07);font-size:11px;font-weight:600;color:var(--accent)">Business Analysis</span>
-            <span style="padding:4px 12px;border-radius:20px;border:1px solid rgba(123,97,255,0.25);background:rgba(123,97,255,0.07);font-size:11px;font-weight:600;color:var(--accent2)">Process Improvement</span>
-            <span style="padding:4px 12px;border-radius:20px;border:1px solid rgba(0,229,160,0.25);background:rgba(0,229,160,0.07);font-size:11px;font-weight:600;color:var(--green)">Data Quality</span>
-            <span style="padding:4px 12px;border-radius:20px;border:1px solid rgba(255,181,71,0.25);background:rgba(255,181,71,0.07);font-size:11px;font-weight:600;color:var(--amber)">Stakeholder Management</span>
+          <div class="chip-row">
+            <span class="chip accent">Business Analysis</span>
+            <span class="chip accent2">Process Improvement</span>
+            <span class="chip green">Data Quality</span>
+            <span class="chip amber">Stakeholder Management</span>
           </div>
         </div>
       </div>
@@ -992,58 +991,43 @@
     <div class="grid-1-2" style="margin-bottom:16px">
 
       <!-- Mission card — rewritten first person -->
-      <div class="card" style="border-top:2px solid var(--accent)">
-        <div style="font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:0.3px;margin-bottom:16px;color:var(--accent)">◆ WHY I BUILT THIS</div>
-        <div style="font-size:13px;line-height:1.9;color:var(--muted)">
-          I wanted this to feel less like a static dashboard and more like a <span style="color:var(--text);font-weight:600">decision-making tool</span>. Something that answers real questions — not just displays numbers.
-        </div>
-        <div style="margin:16px 0;padding:14px 16px;background:rgba(0,212,255,0.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:13px;font-style:italic;color:var(--text);line-height:1.7">
-          "If a stakeholder walked in and asked 'where is the AI market going and what does it mean for us?' — could they find the answer here in under two minutes?"
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--muted)">
-          That question shaped every section: the data I chose, the charts I built, the simulator, the schema design. The goal was always <span style="color:var(--text)">clarity over complexity</span>.
-        </div>
+      <div class="card prose" style="border-top:2px solid var(--accent)">
+        <div class="block-label accent">◆ WHY I BUILT THIS</div>
+        <p>I wanted this to feel less like a static dashboard and more like a <strong>decision-making tool</strong>. Something that answers real questions — not just displays numbers.</p>
+        <div class="pull-quote">"If a stakeholder walked in and asked 'where is the AI market going and what does it mean for us?' — could they find the answer here in under two minutes?"</div>
+        <p>That question shaped every section: the data I chose, the charts I built, the simulator, the schema design. The goal was always <strong>clarity over complexity</strong>.</p>
       </div>
 
       <!-- Bio card — rewritten first person -->
-      <div class="card">
-        <div style="font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:0.3px;margin-bottom:18px;color:var(--text)">About Me</div>
-
-        <div style="font-size:13px;line-height:1.95;color:var(--muted);margin-bottom:16px">
-          My experience is in <span style="color:var(--text);font-weight:600">business analysis, reporting, and process improvement</span> — not software engineering. I work at the point where data, process, and people overlap. That means understanding what a stakeholder actually needs, translating that into a measurable requirement, and making sure the output is something they can actually use.
-        </div>
-
-        <div style="font-size:13px;line-height:1.95;color:var(--muted);margin-bottom:16px">
-          I have hands-on experience with <span style="color:var(--text);font-weight:600">data quality, reconciliation, and pipeline design</span> — the less glamorous parts of analytics that determine whether your numbers are trustworthy. I also spend a lot of time on stakeholder communication: helping people understand what the data is saying, and what it isn't.
-        </div>
-
-        <div style="font-size:13px;line-height:1.95;color:var(--muted)">
-          This project is my way of demonstrating that work in a context that matters right now. The AI industry is moving fast — and someone has to be responsible for making sense of it in a way that's grounded, honest, and <span style="color:var(--text);font-weight:600">actually useful to the people making decisions</span>.
-        </div>
+      <div class="card prose">
+        <div class="block-label">About Me</div>
+        <p>My experience is in <strong>business analysis, reporting, and process improvement</strong> — not software engineering. I work at the point where data, process, and people overlap. That means understanding what a stakeholder actually needs, translating that into a measurable requirement, and making sure the output is something they can actually use.</p>
+        <p>I have hands-on experience with <strong>data quality, reconciliation, and pipeline design</strong> — the less glamorous parts of analytics that determine whether your numbers are trustworthy. I also spend a lot of time on stakeholder communication: helping people understand what the data is saying, and what it isn't.</p>
+        <p>This project is my way of demonstrating that work in a context that matters right now. The AI industry is moving fast — and someone has to be responsible for making sense of it in a way that's grounded, honest, and <strong>actually useful to the people making decisions</strong>.</p>
       </div>
     </div>
 
     <!-- What I actually did -->
     <div class="card" style="margin-bottom:16px">
-      <div style="font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:0.3px;margin-bottom:20px">What I Actually Did Here</div>
+      <div class="block-label">What I Actually Did Here</div>
       <div class="grid-3" style="margin-bottom:0">
 
-        <div style="padding:20px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
-          <div style="font-size:22px;margin-bottom:10px">📊</div>
-          <div style="font-family:var(--font-display);font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)">Data Research & Quality</div>
-          <div style="font-size:12px;line-height:1.8;color:var(--muted)">I sourced data from real publications — Stanford HAI, Epoch AI, Grand View Research, company disclosures. Then I checked it, reconciled it across sources, and tagged confidence levels. The data dictionary documents every field so anyone can follow the trail.</div>
+        <div class="mini-card">
+          <div class="mini-card-icon">📊</div>
+          <div class="mini-card-title">Data Research &amp; Quality</div>
+          <div class="mini-card-text">I sourced data from real publications — Stanford HAI, Epoch AI, Grand View Research, company disclosures. Then I checked it, reconciled it across sources, and tagged confidence levels. The data dictionary documents every field so anyone can follow the trail.</div>
         </div>
 
-        <div style="padding:20px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
-          <div style="font-size:22px;margin-bottom:10px">🗂️</div>
-          <div style="font-family:var(--font-display);font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)">Structure & Design</div>
-          <div style="font-size:12px;line-height:1.8;color:var(--muted)">I designed the data model using a star schema — the standard way to structure data for dashboards. I also mapped out the ETL pipeline, the stakeholder scenarios, and the KPIs before writing a single line of chart code. Structure first, visuals second.</div>
+        <div class="mini-card">
+          <div class="mini-card-icon">🗂️</div>
+          <div class="mini-card-title">Structure &amp; Design</div>
+          <div class="mini-card-text">I designed the data model using a star schema — the standard way to structure data for dashboards. I also mapped out the ETL pipeline, the stakeholder scenarios, and the KPIs before writing a single line of chart code. Structure first, visuals second.</div>
         </div>
 
-        <div style="padding:20px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
-          <div style="font-size:22px;margin-bottom:10px">🎯</div>
-          <div style="font-family:var(--font-display);font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text)">Stakeholder Thinking</div>
-          <div style="font-size:12px;line-height:1.8;color:var(--muted)">Every section was built around a question a real person might ask — a CEO, a CFO, an analyst, a board member. The Stakeholder Simulator section makes this explicit. I think good analysis starts with knowing who needs it and why.</div>
+        <div class="mini-card">
+          <div class="mini-card-icon">🎯</div>
+          <div class="mini-card-title">Stakeholder Thinking</div>
+          <div class="mini-card-text">Every section was built around a question a real person might ask — a CEO, a CFO, an analyst, a board member. The Stakeholder Simulator section makes this explicit. I think good analysis starts with knowing who needs it and why.</div>
         </div>
 
       </div>
@@ -1051,7 +1035,7 @@
 
     <!-- Methodology -->
     <div class="card">
-      <div style="font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:0.3px;margin-bottom:18px">Research Methodology &amp; Data Sources</div>
+      <div class="block-label">Research Methodology &amp; Data Sources</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div class="rule-row"><div class="rule-ck">✓</div><span>Real revenue data from Epoch AI's disclosed ARR dataset</span></div>
         <div class="rule-row"><div class="rule-ck">✓</div><span>Market sizing from Stanford HAI AI Index 2025</span></div>
@@ -1065,21 +1049,21 @@
     </div>
 
     <!-- Sources -->
-    <div style="margin-top:16px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px">
-      <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700;margin-bottom:12px">📎 Sources &amp; References</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px">
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[1] Stanford HAI — <span style="color:var(--accent)">AI Index Report 2025</span> · hai.stanford.edu</div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[2] Epoch AI — <span style="color:var(--accent)">AI Companies Revenue Reports</span> · epoch.ai</div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[3] Grand View Research — <span style="color:var(--accent)">AI Market Analysis 2025–2033</span></div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[4] Precedence Research — <span style="color:var(--accent)">Global AI Market Report 2024–2034</span></div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[5] Market.us — <span style="color:var(--accent)">AI Market Size &amp; CAGR Forecast</span></div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[6] Visual Capitalist — <span style="color:var(--accent)">Soaring Revenues of AI Companies</span></div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[7] WriterBuddy.ai — <span style="color:var(--accent)">Top 50 AI Companies 2024</span></div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)">[8] TLDL.io — <span style="color:var(--accent)">AI Company Rankings 2026</span> · tldl.io</div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0">[9] Anthropic — <span style="color:var(--accent)">Series G Announcement Feb 2026</span> · anthropic.com</div>
-        <div style="font-size:11px;color:var(--muted);padding:4px 0">[10] Fortune Business Insights — <span style="color:var(--accent)">AI Market Trends 2025</span></div>
+    <div class="source-block">
+      <div class="source-block-label">📎 Sources &amp; References</div>
+      <div class="source-list">
+        <div class="source-item">[1] Stanford HAI — <em>AI Index Report 2025</em> · hai.stanford.edu</div>
+        <div class="source-item">[2] Epoch AI — <em>AI Companies Revenue Reports</em> · epoch.ai</div>
+        <div class="source-item">[3] Grand View Research — <em>AI Market Analysis 2025–2033</em></div>
+        <div class="source-item">[4] Precedence Research — <em>Global AI Market Report 2024–2034</em></div>
+        <div class="source-item">[5] Market.us — <em>AI Market Size &amp; CAGR Forecast</em></div>
+        <div class="source-item">[6] Visual Capitalist — <em>Soaring Revenues of AI Companies</em></div>
+        <div class="source-item">[7] WriterBuddy.ai — <em>Top 50 AI Companies 2024</em></div>
+        <div class="source-item">[8] TLDL.io — <em>AI Company Rankings 2026</em> · tldl.io</div>
+        <div class="source-item">[9] Anthropic — <em>Series G Announcement Feb 2026</em> · anthropic.com</div>
+        <div class="source-item">[10] Fortune Business Insights — <em>AI Market Trends 2025</em></div>
       </div>
-      <div style="margin-top:10px;font-size:10px;color:var(--muted);font-style:italic">Data covers disclosures and reports published between Jan 2024 – May 2026. Figures may vary across analysts due to methodology differences.</div>
+      <div class="source-note">Data covers disclosures and reports published between Jan 2024 – May 2026. Figures may vary across analysts due to methodology differences.</div>
     </div>
 
   </div>
@@ -1088,166 +1072,118 @@
   <div id="jargon" class="section">
 
     <!-- Intro -->
-    <div style="background:linear-gradient(135deg,rgba(123,97,255,0.07) 0%,rgba(0,212,255,0.07) 100%);border:1px solid rgba(123,97,255,0.2);border-radius:14px;padding:28px 32px;margin-bottom:24px">
-      <div style="font-family:var(--font-display);font-size:20px;font-weight:800;margin-bottom:8px">🗣️ Plain-English Guide</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.8;max-width:640px">This section translates the business and data terms used throughout this project into plain English. No jargon required to read the jargon guide.</div>
+    <div class="intro-banner">
+      <div class="intro-banner-title">🗣️ Plain-English Guide</div>
+      <div class="intro-banner-text">This section translates the business and data terms used throughout this project into plain English. No jargon required to read the jargon guide.</div>
     </div>
 
     <!-- Category: Business Analysis -->
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px">📋 Business Analysis Terms</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px">
+    <div class="category-label">📋 Business Analysis Terms</div>
+    <div class="term-grid">
 
-      <div class="card" style="border-left:3px solid var(--accent);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent);background:rgba(0,212,255,0.08);padding:3px 10px;border-radius:4px">KPI</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Key Performance Indicator</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The scorecard number that tells you whether something is working. If your KPI is moving in the right direction, you're on track. If it's not, something needs to change.</div>
+      <div class="card term-card">
+        <div class="term-head"><span class="term-badge">KPI</span><span class="term-kicker">Key Performance Indicator</span></div>
+        <div class="term-def">The scorecard number that tells you whether something is working. If your KPI is moving in the right direction, you're on track. If it's not, something needs to change.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--accent2);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent2);background:rgba(123,97,255,0.08);padding:3px 10px;border-radius:4px">Stakeholder</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Who needs the answer</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The person or team who has a stake in the outcome — they could be the decision-maker, the one affected by the decision, or both. Good analysis always starts by identifying who the stakeholder is and what they actually need.</div>
+      <div class="card term-card accent2">
+        <div class="term-head"><span class="term-badge">Stakeholder</span><span class="term-kicker">Who needs the answer</span></div>
+        <div class="term-def">The person or team who has a stake in the outcome — they could be the decision-maker, the one affected by the decision, or both. Good analysis always starts by identifying who the stakeholder is and what they actually need.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--green);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--green);background:rgba(0,229,160,0.08);padding:3px 10px;border-radius:4px">Dashboard</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">What you're looking at right now</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">A visual page that turns data into decisions. Instead of reading a spreadsheet full of numbers, you see charts, KPIs, and trends that let you understand what's happening — and act on it — quickly.</div>
+      <div class="card term-card green">
+        <div class="term-head"><span class="term-badge">Dashboard</span><span class="term-kicker">What you're looking at right now</span></div>
+        <div class="term-def">A visual page that turns data into decisions. Instead of reading a spreadsheet full of numbers, you see charts, KPIs, and trends that let you understand what's happening — and act on it — quickly.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--amber);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--amber);background:rgba(255,181,71,0.08);padding:3px 10px;border-radius:4px">Forecast</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">An educated estimate</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">An educated estimate about what may happen next, based on patterns in past data. A forecast is not a guarantee — it's a structured way of saying "if current trends continue, here's where we'll likely end up."</div>
+      <div class="card term-card amber">
+        <div class="term-head"><span class="term-badge">Forecast</span><span class="term-kicker">An educated estimate</span></div>
+        <div class="term-def">An educated estimate about what may happen next, based on patterns in past data. A forecast is not a guarantee — it's a structured way of saying "if current trends continue, here's where we'll likely end up."</div>
       </div>
 
     </div>
 
     <!-- Category: Data & Finance -->
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px">💰 Data & Finance Terms</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px">
+    <div class="category-label">💰 Data & Finance Terms</div>
+    <div class="term-grid">
 
-      <div class="card" style="border-left:3px solid var(--accent);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent);background:rgba(0,212,255,0.08);padding:3px 10px;border-radius:4px">ARR</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Annual Recurring Revenue</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">How much recurring revenue a company makes per year — the money that comes in reliably on a subscription or contract basis. It's a key number for understanding the financial health of a software or AI company.</div>
+      <div class="card term-card">
+        <div class="term-head"><span class="term-badge">ARR</span><span class="term-kicker">Annual Recurring Revenue</span></div>
+        <div class="term-def">How much recurring revenue a company makes per year — the money that comes in reliably on a subscription or contract basis. It's a key number for understanding the financial health of a software or AI company.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--green);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--green);background:rgba(0,229,160,0.08);padding:3px 10px;border-radius:4px">CAGR</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Compound Annual Growth Rate</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The average growth rate over time, compounded year over year. If a market had a 35% CAGR over five years, it didn't necessarily grow exactly 35% each year — but on average, that's the pace. It smooths out the bumps.</div>
+      <div class="card term-card green">
+        <div class="term-head"><span class="term-badge">CAGR</span><span class="term-kicker">Compound Annual Growth Rate</span></div>
+        <div class="term-def">The average growth rate over time, compounded year over year. If a market had a 35% CAGR over five years, it didn't necessarily grow exactly 35% each year — but on average, that's the pace. It smooths out the bumps.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--accent2);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent2);background:rgba(123,97,255,0.08);padding:3px 10px;border-radius:4px">Confidence Level</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">How much to trust a number</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">How much trust we should place in a number or source. A directly disclosed company figure has high confidence. An analyst estimate for 2034 has much lower confidence — both can be useful, but you should know the difference.</div>
+      <div class="card term-card accent2">
+        <div class="term-head"><span class="term-badge">Confidence Level</span><span class="term-kicker">How much to trust a number</span></div>
+        <div class="term-def">How much trust we should place in a number or source. A directly disclosed company figure has high confidence. An analyst estimate for 2034 has much lower confidence — both can be useful, but you should know the difference.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--amber);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--amber);background:rgba(255,181,71,0.08);padding:3px 10px;border-radius:4px">Reconciliation</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Making the numbers match</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">Comparing numbers from different sources to make sure they line up. When two reports say different things about the same company, reconciliation is the process of figuring out why — and deciding which number to use and why.</div>
+      <div class="card term-card amber">
+        <div class="term-head"><span class="term-badge">Reconciliation</span><span class="term-kicker">Making the numbers match</span></div>
+        <div class="term-def">Comparing numbers from different sources to make sure they line up. When two reports say different things about the same company, reconciliation is the process of figuring out why — and deciding which number to use and why.</div>
       </div>
 
     </div>
 
     <!-- Category: Data Engineering -->
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px">⚙️ Data & Engineering Terms</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px">
+    <div class="category-label">⚙️ Data &amp; Engineering Terms</div>
+    <div class="term-grid">
 
-      <div class="card" style="border-left:3px solid var(--accent);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent);background:rgba(0,212,255,0.08);padding:3px 10px;border-radius:4px">Data Pipeline</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">The journey data takes</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The path data takes from its raw source all the way to a clean, usable dashboard. Think of it like a water pipe — data flows in dirty at one end and comes out clean and structured at the other.</div>
+      <div class="card term-card">
+        <div class="term-head"><span class="term-badge">Data Pipeline</span><span class="term-kicker">The journey data takes</span></div>
+        <div class="term-def">The path data takes from its raw source all the way to a clean, usable dashboard. Think of it like a water pipe — data flows in dirty at one end and comes out clean and structured at the other.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--accent2);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent2);background:rgba(123,97,255,0.08);padding:3px 10px;border-radius:4px">ETL</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Extract · Transform · Load</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The three steps of getting data ready: collect it from the source (Extract), clean and reshape it (Transform), then put it where it needs to go (Load). Most of the real work in analytics happens in the Transform step.</div>
+      <div class="card term-card accent2">
+        <div class="term-head"><span class="term-badge">ETL</span><span class="term-kicker">Extract · Transform · Load</span></div>
+        <div class="term-def">The three steps of getting data ready: collect it from the source (Extract), clean and reshape it (Transform), then put it where it needs to go (Load). Most of the real work in analytics happens in the Transform step.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--green);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--green);background:rgba(0,229,160,0.08);padding:3px 10px;border-radius:4px">Source System</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Where data originally comes from</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">Where the data originally lives before it enters a pipeline. In this project, source systems include Stanford HAI reports, Epoch AI, company press releases, and analyst research publications. Knowing your source matters.</div>
+      <div class="card term-card green">
+        <div class="term-head"><span class="term-badge">Source System</span><span class="term-kicker">Where data originally comes from</span></div>
+        <div class="term-def">Where the data originally lives before it enters a pipeline. In this project, source systems include Stanford HAI reports, Epoch AI, company press releases, and analyst research publications. Knowing your source matters.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--amber);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--amber);background:rgba(255,181,71,0.08);padding:3px 10px;border-radius:4px">Data Quality</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">Is the data trustworthy?</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">Checking whether data is accurate, complete, consistent, and trustworthy. Bad data quality means you might make a confident decision based on a wrong number. It's one of the least glamorous parts of analytics — and one of the most important.</div>
+      <div class="card term-card amber">
+        <div class="term-head"><span class="term-badge">Data Quality</span><span class="term-kicker">Is the data trustworthy?</span></div>
+        <div class="term-def">Checking whether data is accurate, complete, consistent, and trustworthy. Bad data quality means you might make a confident decision based on a wrong number. It's one of the least glamorous parts of analytics — and one of the most important.</div>
       </div>
 
     </div>
 
     <!-- Category: Data Modelling -->
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:12px">🗄️ Data Modelling Terms</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px">
+    <div class="category-label">🗄️ Data Modelling Terms</div>
+    <div class="term-grid">
 
-      <div class="card" style="border-left:3px solid var(--accent);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent);background:rgba(0,212,255,0.08);padding:3px 10px;border-radius:4px">Star Schema</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">How the data is organized</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">A clean way to organize data so dashboards can filter and calculate properly. One central table holds the numbers; surrounding tables hold the context. It's called a star because the diagram looks like one — a center surrounded by points.</div>
+      <div class="card term-card">
+        <div class="term-head"><span class="term-badge">Star Schema</span><span class="term-kicker">How the data is organized</span></div>
+        <div class="term-def">A clean way to organize data so dashboards can filter and calculate properly. One central table holds the numbers; surrounding tables hold the context. It's called a star because the diagram looks like one — a center surrounded by points.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--accent2);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--accent2);background:rgba(123,97,255,0.08);padding:3px 10px;border-radius:4px">Fact Table</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">The numbers we measure</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The main table in a star schema — it holds the actual numbers you want to track, like revenue, market share, or investment amount. Everything else in the model exists to help you slice and filter those numbers.</div>
+      <div class="card term-card accent2">
+        <div class="term-head"><span class="term-badge">Fact Table</span><span class="term-kicker">The numbers we measure</span></div>
+        <div class="term-def">The main table in a star schema — it holds the actual numbers you want to track, like revenue, market share, or investment amount. Everything else in the model exists to help you slice and filter those numbers.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--green);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--green);background:rgba(0,229,160,0.08);padding:3px 10px;border-radius:4px">Dimension Table</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">The context behind the numbers</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">The lookup tables that explain the numbers — things like company name, region, date, or industry segment. Without dimensions, a number like "$30B revenue" has no context. With them, you know it's Anthropic's ARR in April 2026.</div>
+      <div class="card term-card green">
+        <div class="term-head"><span class="term-badge">Dimension Table</span><span class="term-kicker">The context behind the numbers</span></div>
+        <div class="term-def">The lookup tables that explain the numbers — things like company name, region, date, or industry segment. Without dimensions, a number like "$30B revenue" has no context. With them, you know it's Anthropic's ARR in April 2026.</div>
       </div>
 
-      <div class="card" style="border-left:3px solid var(--red);padding:18px 20px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <span style="font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--red);background:rgba(255,95,109,0.08);padding:3px 10px;border-radius:4px">Source → Dashboard</span>
-          <span style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px">The full journey</span>
-        </div>
-        <div style="font-size:13px;color:var(--text);line-height:1.75">Raw data from a source system flows through an ETL pipeline into a star schema (fact + dimension tables), which powers a dashboard. Each step adds structure and trustworthiness. This project walks through every step of that journey.</div>
+      <div class="card term-card red">
+        <div class="term-head"><span class="term-badge">Source → Dashboard</span><span class="term-kicker">The full journey</span></div>
+        <div class="term-def">Raw data from a source system flows through an ETL pipeline into a star schema (fact + dimension tables), which powers a dashboard. Each step adds structure and trustworthiness. This project walks through every step of that journey.</div>
       </div>
 
     </div>
 
     <!-- Quick reference table -->
     <div class="card">
-      <div style="font-family:var(--font-display);font-size:13px;font-weight:800;letter-spacing:0.3px;margin-bottom:16px">Quick Reference</div>
+      <div class="block-label">Quick Reference</div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
       <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:480px">
         <thead>
