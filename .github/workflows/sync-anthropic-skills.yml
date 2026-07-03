@@ -1,0 +1,39 @@
+name: Sync Anthropic Agent Skills
+
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_ref:
+        description: "Anthropic skills branch, tag, or commit SHA to sync"
+        required: false
+        default: "main"
+  schedule:
+    - cron: "0 13 1 * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync Anthropic skills
+        env:
+          UPSTREAM_REF: ${{ github.event.inputs.upstream_ref || 'main' }}
+          DEST: vendor/anthropic-skills
+        run: bash scripts/sync-anthropic-skills.sh
+
+      - name: Commit synced skills
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vendor/anthropic-skills
+          if git diff --cached --quiet; then
+            echo "No skill changes to commit."
+          else
+            git commit -m "Sync Anthropic agent skills"
+            git push
+          fi
