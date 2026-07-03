@@ -1,0 +1,151 @@
+/* ─────────────────────────────────────────────────────────
+   PROSE & PROFILE COMPONENTS — shared building blocks for the
+   About / Plain-English Guide sections. Replaces one-off inline
+   styles with reusable classes so type scale, color, and spacing
+   stay consistent with the rest of the design system.
+   ───────────────────────────────────────────────────────── */
+
+/* ── Small intro banner (Plain-English Guide) ───────────────── */
+.intro-banner {
+  background: linear-gradient(135deg, rgba(123,97,255,0.07) 0%, rgba(0,212,255,0.07) 100%);
+  border: 1px solid rgba(123,97,255,0.2);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+.intro-banner-title {
+  font-family: var(--font-display); font-size: 20px; font-weight: 800; margin-bottom: 8px;
+}
+.intro-banner-text { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 640px; }
+
+/* ── Section eyebrow / label used above card content ──────── */
+.block-label {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 800; letter-spacing: 0.03em;
+  margin-bottom: 18px; color: var(--text);
+}
+.block-label.accent { color: var(--accent); }
+
+/* ── Prose paragraphs ──────────────────────────────────────── */
+.prose p {
+  font-size: 13px; line-height: 1.9; color: var(--muted);
+}
+.prose p + p { margin-top: 14px; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+.pull-quote {
+  margin: 16px 0; padding: 14px 16px;
+  background: rgba(0,212,255,0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-size: 13px; font-style: italic; color: var(--text); line-height: 1.7;
+}
+
+/* ── Profile hero (About page) ──────────────────────────────── */
+.profile-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 40px 36px;
+  margin-bottom: 24px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(0,212,255,0.18);
+  background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(123,97,255,0.10) 100%);
+}
+.profile-hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.profile-hero-body {
+  position: relative;
+  display: flex; align-items: flex-start; gap: 28px; flex-wrap: wrap;
+}
+.profile-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px; font-weight: 800; color: #000;
+  flex-shrink: 0;
+}
+.profile-name {
+  font-family: var(--font-display); font-size: 24px; font-weight: 800; margin-bottom: 4px;
+}
+.profile-role {
+  font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: 0.02em; margin-bottom: 6px;
+}
+.profile-summary { font-size: 13px; line-height: 1.85; color: var(--muted); margin-top: 12px; max-width: 620px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip {
+  padding: 4px 12px; border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: rgba(255,255,255,0.04);
+  font-size: 11px; font-weight: 600; color: var(--text);
+}
+.chip.accent  { border-color: rgba(0,212,255,0.25);   background: rgba(0,212,255,0.07);   color: var(--accent); }
+.chip.accent2 { border-color: rgba(123,97,255,0.25);  background: rgba(123,97,255,0.07);  color: var(--accent2); }
+.chip.green   { border-color: rgba(0,229,160,0.25);   background: rgba(0,229,160,0.07);   color: var(--green); }
+.chip.amber   { border-color: rgba(255,181,71,0.25);  background: rgba(255,181,71,0.07);  color: var(--amber); }
+
+/* ── Mini feature cards ("What I actually did") ─────────────── */
+.mini-card {
+  padding: 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.mini-card-icon { font-size: 22px; margin-bottom: 10px; }
+.mini-card-title { font-family: var(--font-display); font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.mini-card-text { font-size: 12px; line-height: 1.8; color: var(--muted); }
+
+/* ── Sources / references block ─────────────────────────────── */
+.source-block {
+  margin-top: 16px; padding: 18px 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.source-block-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted); font-weight: 700; margin-bottom: 12px;
+}
+.source-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+.source-item { font-size: 11px; color: var(--muted); padding: 4px 0; border-bottom: 1px solid var(--border); }
+.source-item:nth-last-child(-n+2) { border-bottom: none; }
+.source-item em { color: var(--accent); font-style: normal; }
+.source-note { margin-top: 10px; font-size: 10px; color: var(--muted); font-style: italic; }
+
+/* ── Glossary / term cards (Plain-English Guide) ────────────── */
+.term-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-bottom: 24px; }
+.term-card { padding: 18px 20px; border-left: 3px solid var(--accent); }
+.term-card.accent2 { border-left-color: var(--accent2); }
+.term-card.green   { border-left-color: var(--green); }
+.term-card.amber   { border-left-color: var(--amber); }
+.term-card.red     { border-left-color: var(--red); }
+.term-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.term-badge {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+  padding: 3px 10px; border-radius: 4px;
+  background: rgba(0,212,255,0.08); color: var(--accent);
+}
+.term-card.accent2 .term-badge { background: rgba(123,97,255,0.08); color: var(--accent2); }
+.term-card.green   .term-badge { background: rgba(0,229,160,0.08);  color: var(--green); }
+.term-card.amber   .term-badge { background: rgba(255,181,71,0.08); color: var(--amber); }
+.term-card.red     .term-badge { background: rgba(255,95,109,0.08); color: var(--red); }
+.term-kicker { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.term-def { font-size: 13px; color: var(--text); line-height: 1.75; }
+
+.category-label {
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .term-grid { grid-template-columns: 1fr; }
+  .source-list { grid-template-columns: 1fr; }
+  .source-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .source-item:last-child { border-bottom: none; }
+  .profile-hero { padding: 26px 22px; }
+  .profile-hero-body { gap: 18px; }
+  .profile-avatar { width: 60px; height: 60px; font-size: 22px; }
+  .profile-name { font-size: 19px; }
+}

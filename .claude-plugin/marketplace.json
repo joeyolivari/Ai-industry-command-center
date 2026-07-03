@@ -1,0 +1,53 @@
+{
+  "name": "ai-command-center-agent-skills",
+  "owner": {
+    "name": "Joey Carbajo"
+  },
+  "metadata": {
+    "description": "Claude/agent skills setup for the AI Industry Command Center repo, including a vendored Anthropic skills sync target.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "anthropic-document-skills",
+      "description": "Vendored Anthropic document skills for xlsx, docx, pptx, and pdf workflows. Review upstream source-available terms before redistribution.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./vendor/anthropic-skills/skills/xlsx",
+        "./vendor/anthropic-skills/skills/docx",
+        "./vendor/anthropic-skills/skills/pptx",
+        "./vendor/anthropic-skills/skills/pdf"
+      ]
+    },
+    {
+      "name": "anthropic-example-skills",
+      "description": "Vendored Anthropic example skills for frontend design, web app testing, MCP building, skill creation, artifacts, themes, communications, and creative workflows.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./vendor/anthropic-skills/skills/algorithmic-art",
+        "./vendor/anthropic-skills/skills/brand-guidelines",
+        "./vendor/anthropic-skills/skills/canvas-design",
+        "./vendor/anthropic-skills/skills/doc-coauthoring",
+        "./vendor/anthropic-skills/skills/frontend-design",
+        "./vendor/anthropic-skills/skills/internal-comms",
+        "./vendor/anthropic-skills/skills/mcp-builder",
+        "./vendor/anthropic-skills/skills/skill-creator",
+        "./vendor/anthropic-skills/skills/slack-gif-creator",
+        "./vendor/anthropic-skills/skills/theme-factory",
+        "./vendor/anthropic-skills/skills/web-artifacts-builder",
+        "./vendor/anthropic-skills/skills/webapp-testing"
+      ]
+    },
+    {
+      "name": "anthropic-claude-api-skill",
+      "description": "Vendored Anthropic Claude API and SDK documentation skill for building LLM-powered applications.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./vendor/anthropic-skills/skills/claude-api"
+      ]
+    }
+  ]
+}

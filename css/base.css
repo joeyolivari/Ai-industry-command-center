@@ -49,7 +49,19 @@
   --shadow-glow: 0 0 0 1px rgba(0,212,255,0.18), 0 12px 40px -10px rgba(0,212,255,0.22);
 
   --sidebar-w: 256px;
+  --topbar-h: 64px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── View Transitions — quick cross-fade between sections ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.22s;
+  animation-timing-function: var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }

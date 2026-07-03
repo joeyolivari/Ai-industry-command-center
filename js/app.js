@@ -20,7 +20,7 @@ function handleLogoClick() {
   btn.classList.add('clicking');
   setTimeout(function() {
     btn.classList.remove('clicking');
-    show('about', document.querySelector('[onclick*=about]'));
+    show('about');
   }, 420);
 }
 
@@ -34,12 +34,52 @@ function toggleMobileNav() {
 
 // ─── NAVIGATION ────────────────────────────────────
 
+// The story spine: sections in reading order. About/Jargon are the epilogue.
+const STORY_FLOW = ['market','companies','investment','segments','trends','simulator','pipeline','schema','downloads','summary','about','jargon'];
+
+// Which chapter of the rail each section belongs to (about/jargon: none).
+const CHAPTER_OF = {
+  market: 1, companies: 2, investment: 3, segments: 4, trends: 4,
+  simulator: 5, pipeline: 5, schema: 5, downloads: 6, summary: 6
+};
+
+function syncChapterRail(id) {
+  const ch = CHAPTER_OF[id];
+  document.querySelectorAll('.chapter-step').forEach(step => {
+    const n = parseInt(step.dataset.chapter, 10);
+    step.classList.toggle('active', n === ch);
+    step.classList.toggle('passed', ch !== undefined && n < ch);
+    if (n === ch) step.setAttribute('aria-current', 'step');
+    else step.removeAttribute('aria-current');
+  });
+}
+
 function show(id, el) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  if (el) el.classList.add('active');
-  document.getElementById('pageTitle').textContent = titles[id] || id;
+  el = el || document.querySelector(`[data-nav="${id}"]`);
+  const swap = () => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => {
+      n.classList.remove('active');
+      n.removeAttribute('aria-current');
+    });
+    document.getElementById(id).classList.add('active');
+    if (el) { el.classList.add('active'); el.setAttribute('aria-current', 'page'); }
+    document.getElementById('pageTitle').textContent = titles[id] || id;
+    syncChapterRail(id);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    // Charts must render after the section is actually visible — a hidden
+    // canvas has zero width and the draw code would divide against it.
+    if (['market','companies','investment','segments','trends'].includes(id)) {
+      setTimeout(() => { drawAll(id); initInteractivity(id); }, 60);
+    }
+    if (id === 'summary') {
+      document.getElementById('finalScore').textContent = baScore;
+      document.getElementById('finalBar').style.width = (baScore/360*100) + '%';
+    }
+  };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (document.startViewTransition && !reduceMotion) document.startViewTransition(swap);
+  else swap();
   // Close mobile sidebar if open
   const sidebar = document.querySelector('.sidebar');
   const overlay = document.getElementById('mobOverlay');
@@ -47,13 +87,26 @@ function show(id, el) {
     sidebar.classList.remove('mobile-open');
     overlay.classList.remove('visible');
   }
-  if (['market','companies','investment','segments','trends'].includes(id)) {
-    setTimeout(() => { drawAll(id); initInteractivity(id); }, 60);
-  }
-  if (id === 'summary') {
-    document.getElementById('finalScore').textContent = baScore;
-    document.getElementById('finalBar').style.width = (baScore/360*100) + '%';
-  }
+}
+
+// Every section ends with a forward action so the page reads as one
+// continuous case study instead of a widget grid.
+function buildNextChapterCTAs() {
+  STORY_FLOW.forEach((id, i) => {
+    const next = STORY_FLOW[(i + 1) % STORY_FLOW.length];
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    let kicker = 'Continue the story';
+    if (id === 'summary') kicker = 'Epilogue';
+    if (id === 'about') kicker = 'Reference';
+    if (id === 'jargon') kicker = 'Restart the tour';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'next-chapter';
+    btn.innerHTML = `<span class="next-kicker">${kicker}</span><span class="next-title">${titles[next]}<span class="next-arrow">→</span></span>`;
+    btn.addEventListener('click', () => show(next));
+    sec.appendChild(btn);
+  });
 }
 
 // ─── CHART HELPERS ─────────────────────────────────
@@ -85,6 +138,38 @@ function grid(ctx, w, h, pad, steps=5) {
   ctx.restore();
 }
 
+// Adaptive x-axis label plan: decides rotation + label thinning from the
+// actual pixels available per label, so labels never collide on narrow
+// (mobile) canvases regardless of how many data points there are.
+function planXLabels(pxPerLabel, count) {
+  const rotate = pxPerLabel < 50;
+  const minGap = rotate ? 30 : 46;
+  const step = count > 1 ? Math.max(1, Math.ceil(minGap / Math.max(pxPerLabel, 1))) : 1;
+  return { rotate, step, bottomPad: rotate ? 44 : 28 };
+}
+
+// Draws x-axis labels according to a planXLabels() plan, thinning out
+// labels (always keeping the first/last) and rotating when space is tight.
+function drawXLabels(ctx, labels, xForIndex, h, plan) {
+  const n = labels.length;
+  ctx.fillStyle = C.muted;
+  ctx.font = (plan.rotate ? '9px' : "10px") + " 'Manrope', sans-serif";
+  ctx.textAlign = plan.rotate ? 'right' : 'center';
+  for (let i = 0; i < n; i++) {
+    if (i % plan.step !== 0 && i !== n - 1) continue;
+    const x = xForIndex(i);
+    if (plan.rotate) {
+      ctx.save();
+      ctx.translate(x, h - plan.bottomPad + 14);
+      ctx.rotate(-Math.PI / 5);
+      ctx.fillText(labels[i], 0, 0);
+      ctx.restore();
+    } else {
+      ctx.fillText(labels[i], x, h - 10);
+    }
+  }
+}
+
 // hex to rgba helper
 function hexA(hex, a) {
   const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
@@ -108,7 +193,9 @@ function lineChart(id, labels, datasets, opts={}) {
   const r = getCtx(id); if (!r) return;
   const { ctx, w, h } = r;
   const pad = opts.pad || 48;
-  const cw = w - pad - 20, ch = h - pad - 28;
+  const cw = w - pad - 20;
+  const xplan = planXLabels(labels.length > 1 ? cw / (labels.length - 1) : cw, labels.length);
+  const ch = h - pad - xplan.bottomPad;
   let allVals = datasets.flatMap(d => d.data);
   const max = Math.max(...allVals) * 1.12;
   const min = Math.min(...allVals) * (Math.min(...allVals) < 0 ? 1.1 : 0.9);
@@ -117,19 +204,15 @@ function lineChart(id, labels, datasets, opts={}) {
   grid(ctx, w, h, pad);
 
   // y-axis labels
-  ctx.fillStyle = C.muted; ctx.font = '10px var(--font-mono)'; ctx.textAlign = 'right';
+  ctx.fillStyle = C.muted; ctx.font = "10px 'JetBrains Mono', monospace"; ctx.textAlign = 'right';
   for (let i = 0; i <= 4; i++) {
-    const val = min + range * (1 - i/4);
+    const val = Math.round(min + range * (1 - i/4));
     const y = pad + ch * i / 4;
     ctx.fillText(opts.fmt ? opts.fmt(val) : val.toFixed(0), pad - 8, y + 4);
   }
 
   // x-axis labels
-  ctx.textAlign = 'center'; ctx.fillStyle = C.muted; ctx.font = '10px var(--font-sans)';
-  labels.forEach((l, i) => {
-    const x = pad + cw * i / (labels.length - 1);
-    ctx.fillText(l, x, h - 6);
-  });
+  drawXLabels(ctx, labels, i => pad + cw * i / (labels.length - 1), h, xplan);
 
   datasets.forEach((ds, di) => {
     const color = ds.color || [C.accent, C.green, C.accent2, C.amber][di % 4];
@@ -201,7 +284,7 @@ function lineChart(id, labels, datasets, opts={}) {
       ctx.fillStyle = color;
       ctx.beginPath(); ctx.arc(lx + 5, 10, 3.5, 0, Math.PI*2); ctx.fill();
       // label
-      ctx.fillStyle = C.text; ctx.textAlign = 'left'; ctx.font = '10px var(--font-sans)';
+      ctx.fillStyle = C.text; ctx.textAlign = 'left'; ctx.font = "10px 'Manrope', sans-serif";
       ctx.fillText(lbl, lx + 13, 14);
       lx += tw + 32;
     });
@@ -212,18 +295,18 @@ function barChart(id, labels, data, colors, opts={}) {
   const r = getCtx(id); if (!r) return;
   const { ctx, w, h } = r;
   const pad = 44;
-  const many = labels.length > 4;
-  const bottomPad = many ? 48 : 28;
-  const cw = w - pad - 16, ch = h - pad - bottomPad;
+  const cw = w - pad - 16;
+  const xplan = planXLabels(cw / labels.length, labels.length);
+  const ch = h - pad - xplan.bottomPad;
   const max = Math.max(...data) * 1.18;
   const bw = cw / labels.length * 0.58;
 
   grid(ctx, w, h, pad);
 
   // y-axis labels
-  ctx.fillStyle = C.muted; ctx.font = '10px var(--font-mono)'; ctx.textAlign = 'right';
+  ctx.fillStyle = C.muted; ctx.font = "10px 'JetBrains Mono', monospace"; ctx.textAlign = 'right';
   for (let i = 0; i <= 4; i++) {
-    const val = max * (1 - i/4);
+    const val = Math.round(max * (1 - i/4));
     const y = pad + ch * i / 4;
     ctx.fillText(opts.fmt ? opts.fmt(val) : val.toFixed(0), pad - 8, y + 4);
   }
@@ -262,19 +345,21 @@ function barChart(id, labels, data, colors, opts={}) {
     // Value label above bar
     ctx.save();
     ctx.shadowColor = color; ctx.shadowBlur = 8;
-    ctx.fillStyle = C.text; ctx.font = 'bold 10px var(--font-mono)'; ctx.textAlign = 'center';
+    ctx.fillStyle = C.text; ctx.font = "bold 10px 'JetBrains Mono', monospace"; ctx.textAlign = 'center';
     ctx.fillText(opts.fmt ? opts.fmt(v) : v, x + bw/2, y - 7);
     ctx.restore();
 
-    // x-axis label
-    ctx.fillStyle = C.muted; ctx.font = '10px var(--font-sans)';
-    if (many) {
-      ctx.save(); ctx.translate(x + bw/2, h - bottomPad + 14);
-      ctx.rotate(-Math.PI/5); ctx.textAlign = 'right';
-      ctx.fillText(labels[i], 0, 0); ctx.restore();
-    } else {
-      ctx.textAlign = 'center';
-      ctx.fillText(labels[i], x + bw/2, h - 10);
+    // x-axis label (thinned + rotated automatically when space is tight)
+    if (i % xplan.step === 0 || i === labels.length - 1) {
+      ctx.fillStyle = C.muted; ctx.font = (xplan.rotate ? '9px' : "10px") + " 'Manrope', sans-serif";
+      if (xplan.rotate) {
+        ctx.save(); ctx.translate(x + bw/2, h - xplan.bottomPad + 14);
+        ctx.rotate(-Math.PI/5); ctx.textAlign = 'right';
+        ctx.fillText(labels[i], 0, 0); ctx.restore();
+      } else {
+        ctx.textAlign = 'center';
+        ctx.fillText(labels[i], x + bw/2, h - 10);
+      }
     }
   });
 }
@@ -284,6 +369,7 @@ function donut(id, data, colors) {
   const { ctx, w, h } = r;
   const cx = w/2, cy = h/2;
   const ro = Math.min(cx, cy) - 12, ri = ro * 0.58;
+  if (ro <= 0) return; // canvas not laid out yet (hidden section)
   const total = data.reduce((a,b)=>a+b,0);
   let angle = -Math.PI/2;
   const gap = 0.03; // gap between slices in radians
@@ -417,20 +503,21 @@ function attachTip(id, fmtVal) {
 function lineCI(id, labels, datasets, opts={}) {
   const r=getCtx(id); if(!r) return;
   const {ctx,w,h}=r, pad=opts.pad||48;
-  const cw=w-pad-20, ch=h-pad-28;
+  const cw=w-pad-20;
+  const xplan=planXLabels(labels.length>1?cw/(labels.length-1):cw, labels.length);
+  const ch=h-pad-xplan.bottomPad;
   const allV=datasets.flatMap(d=>d.data);
   const max=Math.max(...allV)*1.12;
   const min=Math.min(...allV)*(Math.min(...allV)<0?1.1:0.9);
   const rng=max-min||1;
   grid(ctx,w,h,pad);
 
-  ctx.fillStyle=C.muted; ctx.font='10px var(--font-mono)'; ctx.textAlign='right';
+  ctx.fillStyle=C.muted; ctx.font="10px 'JetBrains Mono', monospace"; ctx.textAlign='right';
   for(let i=0;i<=4;i++){
-    const v=min+rng*(1-i/4), y=pad+ch*i/4;
+    const v=Math.round(min+rng*(1-i/4)), y=pad+ch*i/4;
     ctx.fillText(opts.fmt?opts.fmt(v):v.toFixed(0), pad-8, y+4);
   }
-  ctx.textAlign='center'; ctx.fillStyle=C.muted; ctx.font='10px var(--font-sans)';
-  labels.forEach((l,i)=>{ const x=pad+cw*i/(labels.length-1); ctx.fillText(l,x,h-6); });
+  drawXLabels(ctx, labels, i => pad + cw * i / (labels.length - 1), h, xplan);
 
   const byX={};
   datasets.forEach((ds,di)=>{
@@ -473,7 +560,7 @@ function lineCI(id, labels, datasets, opts={}) {
       if(ctx.roundRect) ctx.roundRect(lx-4,2,tw+22,16,4); else ctx.rect(lx-4,2,tw+22,16);
       ctx.fill();
       ctx.fillStyle=col; ctx.beginPath(); ctx.arc(lx+5,10,3.5,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle=C.text; ctx.textAlign='left'; ctx.font='10px var(--font-sans)';
+      ctx.fillStyle=C.text; ctx.textAlign='left'; ctx.font="10px 'Manrope', sans-serif";
       ctx.fillText(lbl,lx+13,14); lx+=tw+32;
     });
   }
@@ -483,16 +570,16 @@ function lineCI(id, labels, datasets, opts={}) {
 function barCI(id, labels, data, colors, opts={}) {
   const r=getCtx(id); if(!r) return;
   const {ctx,w,h}=r, pad=44;
-  const many=labels.length>4;
-  const bottomPad=many?48:28;
-  const cw=w-pad-16, ch=h-pad-bottomPad;
+  const cw=w-pad-16;
+  const xplan=planXLabels(cw/labels.length, labels.length);
+  const ch=h-pad-xplan.bottomPad;
   const max=Math.max(...data)*1.18, bw=cw/labels.length*0.58;
   grid(ctx,w,h,pad);
 
   // y-axis labels
-  ctx.fillStyle=C.muted; ctx.font='10px var(--font-mono)'; ctx.textAlign='right';
+  ctx.fillStyle=C.muted; ctx.font="10px 'JetBrains Mono', monospace"; ctx.textAlign='right';
   for(let i=0;i<=4;i++){
-    const v=max*(1-i/4), y=pad+ch*i/4;
+    const v=Math.round(max*(1-i/4)), y=pad+ch*i/4;
     ctx.fillText(opts.fmt?opts.fmt(v):v.toFixed(0), pad-8, y+4);
   }
 
@@ -520,16 +607,18 @@ function barCI(id, labels, data, colors, opts={}) {
 
     // value label
     ctx.save(); ctx.shadowColor=color; ctx.shadowBlur=8;
-    ctx.fillStyle=C.text; ctx.font='bold 10px var(--font-mono)'; ctx.textAlign='center';
+    ctx.fillStyle=C.text; ctx.font="bold 10px 'JetBrains Mono', monospace"; ctx.textAlign='center';
     ctx.fillText(opts.fmt?opts.fmt(v):v, x+bw/2, y-7); ctx.restore();
 
-    // x label
-    ctx.fillStyle=C.muted; ctx.font='10px var(--font-sans)';
-    if(many){
-      ctx.save(); ctx.translate(x+bw/2,h-bottomPad+14); ctx.rotate(-Math.PI/5); ctx.textAlign='right';
-      ctx.fillText(labels[i],0,0); ctx.restore();
-    } else {
-      ctx.textAlign='center'; ctx.fillText(labels[i],x+bw/2,h-10);
+    // x label (thinned + rotated automatically when space is tight)
+    if(i % xplan.step === 0 || i === labels.length - 1){
+      ctx.fillStyle=C.muted; ctx.font=(xplan.rotate?'9px':"10px")+" 'Manrope', sans-serif";
+      if(xplan.rotate){
+        ctx.save(); ctx.translate(x+bw/2,h-xplan.bottomPad+14); ctx.rotate(-Math.PI/5); ctx.textAlign='right';
+        ctx.fillText(labels[i],0,0); ctx.restore();
+      } else {
+        ctx.textAlign='center'; ctx.fillText(labels[i],x+bw/2,h-10);
+      }
     }
     pts.push({x:x+bw/2,label:labels[i],rows:[{name:labels[i],color,rawVal:v}]});
   });
@@ -706,6 +795,8 @@ function initInteractivity(section){
 }
 
 window.addEventListener('load', () => {
+  buildNextChapterCTAs();
+  renderMktKPIs();
   drawAll('market');
   updateProgress();
   setTimeout(()=>initInteractivity('market'),100);
