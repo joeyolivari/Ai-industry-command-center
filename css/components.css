@@ -224,10 +224,10 @@
 }
 .kpi:hover {
   border-color: var(--border2);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255,255,255,0.03) inset;
 }
-.kpi:hover::after { opacity: 0.13; }
+.kpi:hover::after { opacity: 0.18; }
 .kpi::before {
   content: '';
   position: absolute; top:0; left:0; right:0; height:3px;

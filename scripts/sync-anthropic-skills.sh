@@ -29,7 +29,7 @@ git clone \
   "$TMP_DIR/anthropic-skills"
 
 cd "$TMP_DIR/anthropic-skills"
-git sparse-checkout set skills spec template .claude-plugin README.md THIRD_PARTY_NOTICES.md
+git sparse-checkout set --no-cone skills spec template .claude-plugin README.md THIRD_PARTY_NOTICES.md
 UPSTREAM_COMMIT="$(git rev-parse HEAD)"
 cd - >/dev/null
 
