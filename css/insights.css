@@ -1,0 +1,157 @@
+/* ─────────────────────────────────────────────────────────
+   INSIGHTS LAYER — Executive Decision Brief, So-What cards,
+   Risk & Watchlist, Opportunity Matrix, KPI Dictionary,
+   Data Governance scorecard. Reuses design tokens from base.css.
+   ───────────────────────────────────────────────────────── */
+
+/* ── Value-type / confidence badges (used everywhere) ── */
+.vtype-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 20px; font-family: var(--font-mono);
+  border: 1px solid transparent;
+}
+.vtype-actual      { background: rgba(0,229,160,0.12); color: var(--green); border-color: rgba(0,229,160,0.25); }
+.vtype-estimated   { background: rgba(255,181,71,0.12); color: var(--amber); border-color: rgba(255,181,71,0.25); }
+.vtype-forecast    { background: rgba(123,97,255,0.12); color: var(--accent2); border-color: rgba(123,97,255,0.25); }
+.vtype-illustrative,
+.vtype-synthetic   { background: rgba(255,95,109,0.12); color: var(--red); border-color: rgba(255,95,109,0.25); }
+.vtype-mixed       { background: rgba(150,180,235,0.10); color: var(--muted); border-color: var(--border2); }
+
+.conf-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+.conf-badge.conf-high, .so-what-tag.conf-high   { background: rgba(0,229,160,0.12); color: var(--green); }
+.conf-badge.conf-medium, .so-what-tag.conf-medium { background: rgba(255,181,71,0.12); color: var(--amber); }
+.conf-badge.conf-low, .so-what-tag.conf-low    { background: rgba(255,95,109,0.12); color: var(--red); }
+
+/* ── Executive Decision Brief ─────────────────────────── */
+.exec-brief {
+  background: linear-gradient(160deg, rgba(0,212,255,0.06), rgba(123,97,255,0.04) 60%, transparent);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-xl);
+  padding: 26px 26px 20px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-md);
+}
+.brief-top { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.brief-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.brief-title { font-size: clamp(19px, 2.4vw, 26px); font-weight: 700; line-height: 1.25; max-width: 640px; margin-bottom: 10px; }
+.brief-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.brief-updated { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+
+.brief-scores { display: flex; gap: 22px; flex-wrap: wrap; }
+.brief-score { text-align: center; width: 118px; }
+.brief-score-ring {
+  --val: 0;
+  width: 84px; height: 84px; margin: 0 auto 8px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--val) * 1%), rgba(255,255,255,0.08) 0);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.brief-score-ring::before { content:''; position:absolute; inset:7px; border-radius:50%; background: var(--surface); }
+.brief-score-ring span { position: relative; font-family: var(--font-mono); font-weight: 700; font-size: 18px; }
+.brief-score-label { font-size: 11px; color: var(--text); font-weight: 600; }
+.brief-score-tip { font-size: 9px; color: var(--muted); cursor: help; margin-top: 2px; }
+
+.brief-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.brief-col-title { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.brief-item { font-size: 12.5px; line-height: 1.65; color: var(--text); padding: 12px 13px; border-radius: var(--r-sm); margin-bottom: 10px; border-left: 3px solid var(--border2); background: var(--surface2); }
+.brief-item.finding { border-left-color: var(--accent); }
+.brief-item.risk { border-left-color: var(--red); }
+.brief-item.opportunity { border-left-color: var(--green); }
+.brief-item.action { border-left-color: var(--accent2); }
+.brief-kpi { display: block; margin-top: 6px; font-size: 10px; color: var(--accent); font-family: var(--font-mono); }
+.brief-owner { display: block; margin-top: 6px; font-size: 10px; color: var(--muted); font-family: var(--font-mono); }
+.brief-footnote { font-size: 10.5px; color: var(--faint); line-height: 1.6; margin-top: 6px; border-top: 1px solid var(--border); padding-top: 12px; }
+
+/* ── So-What insight cards ────────────────────────────── */
+.so-what { margin-top: 14px; padding: 14px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); }
+.so-what-row { display: flex; gap: 10px; font-size: 12px; line-height: 1.6; margin-bottom: 7px; }
+.so-what-label { flex: 0 0 130px; font-weight: 700; color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.03em; padding-top: 1px; }
+.so-what-val { color: var(--text); }
+.so-what-foot { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 6px; }
+.so-what-tag { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--muted); }
+.so-what-tag.stakeholder { background: rgba(0,212,255,0.10); color: var(--accent); }
+.so-what-tag.kpi { background: rgba(123,97,255,0.10); color: var(--accent2); font-family: var(--font-mono); }
+.so-what-source { font-size: 10.5px; color: var(--faint); font-style: italic; }
+
+/* ── Risk & Watchlist ──────────────────────────────────── */
+.watch-item { display: flex; gap: 12px; padding: 13px 14px; border-radius: var(--r-md); background: var(--surface2); border: 1px solid var(--border); margin-bottom: 10px; }
+.watch-sev { flex: 0 0 auto; font-size: 9px; font-weight: 800; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 6px; height: fit-content; font-family: var(--font-mono); }
+.watch-high .watch-sev { background: rgba(255,95,109,0.16); color: var(--red); }
+.watch-medium .watch-sev { background: rgba(255,181,71,0.16); color: var(--amber); }
+.watch-low .watch-sev { background: rgba(150,180,235,0.14); color: var(--muted); }
+.watch-high { border-left: 3px solid var(--red); }
+.watch-medium { border-left: 3px solid var(--amber); }
+.watch-low { border-left: 3px solid var(--border2); }
+.watch-title { font-size: 13px; font-weight: 650; margin-bottom: 4px; }
+.watch-why { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 5px; }
+.watch-kpi { font-size: 10px; color: var(--accent); font-family: var(--font-mono); }
+
+/* ── Opportunity Matrix ───────────────────────────────── */
+.matrix-detail-head { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+.matrix-detail-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.matrix-detail-name { font-size: 15px; font-weight: 700; }
+.matrix-detail-quadrant { font-size: 11px; font-weight: 700; margin-left: auto; }
+.matrix-detail-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.matrix-metric { background: var(--surface2); border-radius: var(--r-sm); padding: 9px 11px; }
+.matrix-metric span { display: block; font-size: 10px; color: var(--muted); margin-bottom: 3px; }
+.matrix-metric b { font-size: 14px; font-family: var(--font-mono); }
+.matrix-detail-row { font-size: 12.5px; line-height: 1.65; color: var(--text); margin-bottom: 9px; }
+.matrix-detail-k { display: block; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); margin-bottom: 2px; }
+
+/* ── KPI Dictionary ────────────────────────────────────── */
+.kpi-dict-search {
+  width: 100%; padding: 12px 16px; margin-bottom: 16px;
+  background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--r-md);
+  color: var(--text); font-family: var(--font-sans); font-size: 13px;
+}
+.kpi-dict-search:focus { outline: none; border-color: var(--accent); }
+.kpi-dict-grid-wrap { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.kpi-dict-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 15px 16px; }
+.kpi-dict-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.kpi-dict-name { font-size: 14px; font-weight: 700; }
+.kpi-dict-cat { font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--accent2); background: rgba(123,97,255,0.12); padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+.kpi-dict-def { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.kpi-dict-formula { font-size: 11px; margin-bottom: 10px; }
+.kpi-dict-formula span { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; margin-bottom: 3px; }
+.kpi-dict-formula code { display: block; background: var(--bg2); padding: 8px 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--green); overflow-x: auto; }
+.kpi-dict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; margin-bottom: 10px; }
+.kpi-dict-grid div { font-size: 11px; color: var(--text); line-height: 1.5; }
+.kpi-dict-grid span { display: block; color: var(--muted); font-size: 9.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+.kpi-dict-example { font-size: 11px; color: var(--text); background: rgba(0,212,255,0.06); border-radius: 6px; padding: 8px 10px; }
+.kpi-dict-example span { display: block; color: var(--accent); font-size: 9.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+
+/* ── Data Quality Scorecard ────────────────────────────── */
+.dq-scorecard { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.dq-dim { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; }
+.dq-dim-name { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); margin-bottom: 8px; }
+.dq-dim-score { font-size: 26px; font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px; }
+.dq-dim-score.hi { color: var(--green); } .dq-dim-score.mid { color: var(--amber); } .dq-dim-score.lo { color: var(--red); }
+.dq-dim-bar { height: 5px; border-radius: 4px; background: rgba(255,255,255,0.08); overflow: hidden; margin-bottom: 8px; }
+.dq-dim-bar-fill { height: 100%; border-radius: 4px; }
+.dq-dim-note { font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── Data Governance table ─────────────────────────────── */
+.gov-table-wrap { overflow-x: auto; }
+.gov-table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 980px; }
+.gov-table th { text-align: left; padding: 9px 10px; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--border2); white-space: nowrap; font-size: 10px; text-transform: uppercase; }
+.gov-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; line-height: 1.5; }
+.gov-table td.gov-label { font-weight: 700; white-space: nowrap; }
+
+/* ── Story workflow strip (My Contribution / Business Value) ── */
+.workflow-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); margin: 14px 0; }
+.workflow-step { font-size: 11px; font-weight: 650; padding: 8px 12px; border-radius: 20px; background: var(--surface3); border: 1px solid var(--border2); color: var(--text); }
+.workflow-arrow { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 900px) {
+  .brief-grid { grid-template-columns: 1fr; }
+  .kpi-dict-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .exec-brief { padding: 18px 16px 16px; }
+  .brief-scores { gap: 14px; }
+  .brief-score { width: 90px; }
+  .brief-score-ring { width: 68px; height: 68px; }
+  .so-what-label { flex-basis: 100px; }
+}

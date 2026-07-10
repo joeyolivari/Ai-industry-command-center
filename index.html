@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/insights.css">
 </head>
 <body>
 <div id="chartTooltip" class="chart-tooltip"></div>
@@ -59,6 +60,19 @@
     </button>
     <button type="button" class="nav-item" data-nav="schema" onclick="show('schema',this)">
       <span class="nav-dot"></span> Star Schema
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Decision Support · Ch 5</div>
+    <button type="button" class="nav-item" data-nav="matrix" onclick="show('matrix',this)">
+      <span class="nav-dot"></span> Opportunity Matrix
+    </button>
+    <button type="button" class="nav-item" data-nav="watchlist" onclick="show('watchlist',this)">
+      <span class="nav-dot"></span> Risk & Watchlist
+    </button>
+    <button type="button" class="nav-item" data-nav="kpidict" onclick="show('kpidict',this)">
+      <span class="nav-dot"></span> KPI Dictionary
     </button>
   </div>
 
@@ -157,8 +171,10 @@
       </div>
     </div>
 
+    <div id="execBrief" class="exec-brief"></div>
+
     <div class="section-story">
-      <div class="story-question">How big is the AI opportunity, and why does it matter now?</div>
+      <div class="story-question">Where is the AI market expanding fastest, and why does it matter now?</div>
       <div class="story-answer">Start with market size, enterprise adoption, and regional share before moving into competitors, capital flows, and data-product design.</div>
     </div>
     <div class="path-strip" aria-label="Quick paths">
@@ -210,6 +226,7 @@
           <div><div class="card-title">Global AI Market Size Trajectory</div><div class="card-sub">Actual 2020–2025 · Forecast to 2034 (USD Billion)</div></div>
         </div>
         <div class="chart-wrap"><canvas id="cMarket" height="240"></canvas></div>
+        <div id="soWhatMarket"></div>
       </div>
 
       <!-- Regional Donut -->
@@ -272,8 +289,8 @@
   <div id="companies" class="section">
 
     <div class="section-story">
-      <div class="story-question">Who is capturing value in the AI market?</div>
-      <div class="story-answer">Compare revenue, valuation, company type, and product strengths to see where competitive advantage is accumulating.</div>
+      <div class="story-question">Which companies combine scale and momentum?</div>
+      <div class="story-answer">Compare revenue, valuation, company type, and product strengths to see where competitive advantage is accumulating — and where a small company is closing the gap fastest.</div>
     </div>
 
     <!-- Filter bar -->
@@ -318,6 +335,7 @@
           <div><div class="card-title">AI Model Revenue Race</div><div class="card-sub">Annualized Run Rate (ARR) USD Billions · 2023–2026</div></div>
         </div>
         <div class="chart-wrap"><canvas id="cRevRace" height="260"></canvas></div>
+        <div id="soWhatCompanies"></div>
       </div>
 
       <!-- Valuations -->
@@ -440,8 +458,8 @@
   <div id="investment" class="section">
 
     <div class="section-story">
-      <div class="story-question">Where is capital flowing?</div>
-      <div class="story-answer">Track investment momentum across total AI, generative AI, and geography to understand what the market is funding next.</div>
+      <div class="story-question">Where is investment capital concentrating?</div>
+      <div class="story-answer">Track investment momentum across total AI, generative AI, and geography to understand what the market is funding next — and whether capital is running ahead of demand.</div>
     </div>
 
     <!-- Filter bar -->
@@ -492,6 +510,7 @@
           <div><div class="card-title">Annual AI Investment Trend (USD Billions)</div><div class="card-sub">Global private AI funding 2019–2025</div></div>
         </div>
         <div class="chart-wrap"><canvas id="cInvest" height="240"></canvas></div>
+        <div id="soWhatInvestment"></div>
       </div>
 
       <div class="card">
@@ -553,8 +572,8 @@
   <div id="segments" class="section">
 
     <div class="section-story">
-      <div class="story-question">Which industries are growing fastest?</div>
-      <div class="story-answer">Use market share and CAGR views to separate today's largest verticals from tomorrow's fastest-growth opportunities.</div>
+      <div class="story-question">Which industries offer the strongest growth-share opportunity?</div>
+      <div class="story-answer">Use market share and CAGR views to separate today's largest verticals from tomorrow's fastest-growth opportunities — then open the Opportunity Matrix for a full growth-share plot.</div>
     </div>
 
     <!-- Filter bar -->
@@ -600,6 +619,7 @@
           <div><div class="card-title">AI Revenue by End-Use Vertical</div><div class="card-sub">Market share % · 2025</div></div>
         </div>
         <div class="chart-wrap"><canvas id="cVertical" height="300"></canvas></div>
+        <div id="soWhatSectors"></div>
       </div>
 
       <div class="card">
@@ -651,8 +671,8 @@
   <div id="trends" class="section">
 
     <div class="section-story">
-      <div class="story-question">What is changing over time?</div>
-      <div class="story-answer">Follow ARR trajectories and benchmark movement to connect business traction with capability progress.</div>
+      <div class="story-question">Are capability gains translating into commercial value?</div>
+      <div class="story-answer">Follow ARR trajectories and benchmark movement to connect business traction with capability progress — and see where the two are decoupled.</div>
     </div>
 
     <!-- Filter bar -->
@@ -705,6 +725,7 @@
           <div><div class="card-title">Anthropic Revenue Trajectory</div><div class="card-sub">Annualized Run Rate (ARR) — actual disclosed data (USD Billions)</div></div>
         </div>
         <div class="chart-wrap"><canvas id="cAnthro" height="250"></canvas></div>
+        <div id="soWhatTrends"></div>
       </div>
 
       <!-- Key Trends -->
@@ -767,6 +788,7 @@
           <div class="hbar-track"><div class="hbar-fill" style="width:27.9%;background:var(--green)"></div></div>
         </div>
       </div>
+      <div id="benchmarkInterpretation"></div>
     </div>
   </div>
 
@@ -826,8 +848,8 @@
   <!-- ══════════ PIPELINE ══════════ -->
   <div id="pipeline" class="section">
     <div class="section-story">
-      <div class="story-question">How would this become a repeatable data product?</div>
-      <div class="story-answer">Trace the path from external sources through landing, cleaning, modeling, metrics, dashboards, and governance.</div>
+      <div class="story-question">How do we know these numbers can be trusted — and how would this become a repeatable data product?</div>
+      <div class="story-answer">Trace the path from external sources through landing, cleaning, modeling, metrics, dashboards, and governance — including where sources disagree and how conflicts were resolved.</div>
     </div>
     <div class="card" style="margin-bottom:20px">
       <div class="card-header"><div class="card-title">AI Industry Data Pipeline Architecture</div><div class="card-sub">Source → Transform → Serve</div></div>
@@ -867,6 +889,18 @@
         <div class="rule-row"><div class="rule-ck">✓</div><span>Map investment rounds to calendar year</span></div>
         <div class="rule-row"><div class="rule-ck">✓</div><span>Deduplicate funding announcements (same round)</span></div>
         <div class="rule-row"><div class="rule-ck">✓</div><span>Convert CAGR forecasts to absolute USD projections</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header"><div><div class="card-title">Data Quality Scorecard</div><div class="card-sub">Portfolio-level self-assessment across six standard data-quality dimensions</div></div></div>
+      <div class="dq-scorecard" id="dqScorecard"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div><div class="card-title">Data Governance — Source to Dashboard</div><div class="card-sub">Owner, refresh cadence, transformation/validation rules, and known limitations per dataset</div></div></div>
+      <div class="gov-table-wrap">
+        <table class="gov-table" id="govTable"></table>
       </div>
     </div>
   </div>
@@ -934,6 +968,53 @@
       </table>
       </div>
     </div>
+  </div>
+
+  <!-- ══════════ OPPORTUNITY MATRIX ══════════ -->
+  <div id="matrix" class="section">
+    <div class="section-story">
+      <div class="story-question">Which segments combine scale and momentum — and which are the earlier-stage bets?</div>
+      <div class="story-answer">A growth-share matrix plots current scale against expected growth. Quadrant boundaries are computed from the live median of the plotted set, not fixed thresholds.</div>
+    </div>
+    <div class="filter-bar">
+      <span class="filter-label">Plot</span>
+      <button class="filter-chip active" data-group="matrix-mode" onclick="setMatrixMode('sectors',this)">Sectors</button>
+      <button class="filter-chip" data-group="matrix-mode" onclick="setMatrixMode('companies',this)">Companies</button>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <div><div class="card-title">Opportunity Matrix</div><div class="card-sub">Bubble size = estimated market value (sectors) or valuation (companies) · Click a bubble for detail</div></div>
+      </div>
+      <div class="chart-wrap"><canvas id="cOpportunityMatrix" height="380"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Selected Segment Detail</div></div>
+      <div id="matrixDetail"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ RISK & WATCHLIST ══════════ -->
+  <div id="watchlist" class="section">
+    <div class="section-story">
+      <div class="story-question">Which assumptions create the greatest forecast risk right now?</div>
+      <div class="story-answer">A dynamically generated business watchlist — every signal below is computed from the live datasets and governance metadata, not hand-picked.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Business Risk &amp; Watchlist</div><div class="card-sub"><span id="watchlistCount">0</span> active signals · sorted by severity</div></div>
+      </div>
+      <div id="watchlistBody"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ KPI DICTIONARY ══════════ -->
+  <div id="kpidict" class="section">
+    <div class="section-story">
+      <div class="story-question">What does each KPI on this dashboard actually mean, and how is it calculated?</div>
+      <div class="story-answer">Every calculated metric used across this project, documented with its formula, business purpose, primary stakeholder, and limitations.</div>
+    </div>
+    <input type="text" class="kpi-dict-search" placeholder="Search KPIs by name, category, or stakeholder…" oninput="searchKpiDictionary(this.value)" aria-label="Search KPI dictionary">
+    <div class="kpi-dict-grid-wrap" id="kpiDictBody"></div>
   </div>
 
   <!-- ══════════ ABOUT ══════════ -->
@@ -1004,8 +1085,45 @@
       </div>
     </div>
 
+    <!-- How This Project Creates Business Value -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="block-label accent">◆ HOW THIS PROJECT CREATES BUSINESS VALUE</div>
+      <p style="font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:10px">This project demonstrates the ability to translate a stakeholder request into a measurable business goal, identify the right KPIs, reconcile conflicting data sources, design an analytical data model, build an executive-level dashboard, interpret trends and variances, and produce a recommendation — not just a visualization. Every dashboard here separates factual, disclosed results from estimates and assumptions, and communicates technical work in plain English.</p>
+      <div class="workflow-strip" aria-label="Project workflow">
+        <span class="workflow-step">Business question</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Stakeholder requirements</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Source identification</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Data validation</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Transformation</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Dimensional model</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">KPI calculation</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Visualization</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Insight</span><span class="workflow-arrow">→</span>
+        <span class="workflow-step">Recommended action</span>
+      </div>
+    </div>
+
+    <!-- My Contribution -->
+    <div class="card prose" style="margin-bottom:16px;border-top:2px solid var(--accent2)">
+      <div class="block-label accent2">◆ MY CONTRIBUTION</div>
+      <p>I designed and developed this project as an end-to-end AI market intelligence and business analytics demonstration. I translated stakeholder scenarios into analytical requirements, structured multiple datasets, designed the KPI calculation logic, built a dimensional (star schema) model, created interactive visualizations, and connected every output back to a business decision — the Executive Decision Brief, the Opportunity Matrix, and the Risk &amp; Watchlist panel exist because a dashboard without a "so what" isn't finished.</p>
+      <p style="margin-top:10px">To be clear: I did not work for Anthropic, OpenAI, NVIDIA, Microsoft, or any of the other companies referenced here. This is an independent analytical portfolio project built on publicly reported figures, clearly tagged by confidence level and value type (actual / estimated / forecast / illustrative).</p>
+      <div class="chip-row" style="margin-top:12px">
+        <span class="chip accent">Business Analysis</span>
+        <span class="chip accent2">Requirements Gathering</span>
+        <span class="chip green">Data Analysis</span>
+        <span class="chip amber">JavaScript</span>
+        <span class="chip accent">Data Visualization</span>
+        <span class="chip accent2">KPI Development</span>
+        <span class="chip green">Forecasting</span>
+        <span class="chip amber">Dimensional Modelling</span>
+        <span class="chip accent">Data Governance</span>
+        <span class="chip accent2">Executive Communication</span>
+      </div>
+    </div>
+
     <!-- Methodology -->
-    <div class="card">
+    <div class="card" style="margin-bottom:16px">
       <div class="block-label">Research Methodology &amp; Data Sources</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div class="rule-row"><div class="rule-ck">✓</div><span>Real revenue data from Epoch AI's disclosed ARR dataset</span></div>
@@ -1353,8 +1471,12 @@
 
 </div><!-- end .main -->
 <script src="js/data/appData.js"></script>
+<script src="js/data/calc.js"></script>
+<script src="js/data/kpiDictionary.js"></script>
 <script src="js/features/downloads.js"></script>
 <script src="js/features/simulator.js"></script>
+<script src="js/features/insights.js"></script>
+<script src="js/features/opportunityMatrix.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

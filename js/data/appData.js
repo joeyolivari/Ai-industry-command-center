@@ -7,6 +7,7 @@ window.AICC_DATA = (() => {
     investment:'Investment & Funding', segments:'Sector Breakdown',
     trends:'Trends & Forecast', simulator:'Stakeholder Simulator',
     pipeline:'Data Pipeline Architecture', schema:'Star Schema Model',
+    matrix:'Opportunity Matrix', watchlist:'Risk & Watchlist', kpidict:'KPI Dictionary',
     summary:'Final Summary', downloads:'Download Center'
   };
 
@@ -126,6 +127,157 @@ window.AICC_DATA = (() => {
     }
   };
 
+  // ── DATA GOVERNANCE LAYER ──────────────────────────────
+  // Centralized source-of-truth for data-integrity metadata so no value in
+  // this project is presented as a verified fact without a visible source,
+  // an "as of" date, a value-type tag, and a confidence level. This is the
+  // single place to update when a source is refreshed or reclassified —
+  // dashboard code reads from here rather than hardcoding trust claims.
+  const PROJECT_META = {
+    lastUpdated: '2026-05-01',
+    projectType: 'Analytical portfolio demonstration — not a live production data feed',
+    confidenceScale: {
+      high: 'Directly disclosed, audited, or peer-reviewed figure',
+      medium: 'Analyst estimate or third-party model with disclosed methodology',
+      low: 'Long-range forecast, illustrative figure, or single-source estimate with no independent corroboration'
+    },
+    valueTypes: {
+      actual: 'A figure as directly reported by the source (e.g. a disclosed ARR number)',
+      estimated: 'A figure modeled or interpolated by an analyst firm from partial data',
+      forecast: 'A forward-looking projection beyond the source’s observed data',
+      illustrative: 'A figure constructed for this portfolio to demonstrate a calculation or design pattern — not a claim about the real market',
+      synthetic: 'A placeholder figure with no external source, used only where real data was unavailable'
+    }
+  };
+
+  // Per-dataset governance record. Fields map directly to the "Data Quality
+  // and Governance" requirement: source system, owner, refresh cadence,
+  // transformation/validation rules, confidence, and known limitations.
+  const DATA_GOVERNANCE = {
+    market: {
+      label: 'Global AI Market Size', sourceSystem: 'Grand View Research · Market.us · Precedence Research',
+      owner: 'Market Intelligence (simulated)', refreshFrequency: 'Annual (analyst report cycle)',
+      dataType: 'Time series, USD Billions', asOf: '2025-12-01',
+      valueType: '2019–2025 = estimated (analyst-modeled); 2026–2034 = forecast',
+      confidence: 'medium',
+      transformationRule: 'Normalized to USD Billions; regional % columns rebased to sum to 100 per year',
+      validationRule: 'Year-over-year growth must fall within ±60pp of prior 3-yr average or is flagged for review',
+      missingValueHandling: 'No interpolation performed — gap years (2027, 2029, 2031–2033) are intentionally omitted rather than estimated',
+      duplicateHandling: 'N/A — one row per year, deduplicated on year key',
+      outlierHandling: '2020→2021 near-100% growth retained and flagged (COVID-era generative AI inflection, corroborated across all three sources)',
+      reconciliationMethod: 'Where sources disagreed by >8%, the mid-point of the disclosed ranges was used and both bounds are noted in the KPI dictionary',
+      sourceConflicts: 'Grand View Research and Precedence Research diverge by ~9% on 2025 figure; Market.us used as tie-breaker',
+      lineage: 'Source report → raw landing → currency/unit normalization → Fact_AI_Market_Activity → Market KPIs → Market Size Trajectory chart'
+    },
+    companies: {
+      label: 'AI Company Intelligence', sourceSystem: 'Epoch AI · Company disclosures · SEC filings · Crunchbase',
+      owner: 'Competitive Intelligence (simulated)', refreshFrequency: 'Ad hoc, on disclosure event',
+      dataType: 'Cross-sectional snapshot, USD Billions', asOf: '2026-04-01',
+      valueType: 'ARR = actual (disclosed) for most rows; valuations = estimated (last funding round or public market cap)',
+      confidence: 'high for ARR/revenue; medium for private valuations',
+      transformationRule: 'MRR and quarterly figures annualized to ARR; all currencies normalized to USD',
+      validationRule: 'YoY growth % cross-checked against two independent disclosure points where available',
+      missingValueHandling: 'Google DeepMind ARR is a segment estimate (Alphabet does not break it out) — flagged medium confidence',
+      duplicateHandling: 'One row per company — conglomerates (Alphabet, Meta) report the AI-attributable segment, not total company revenue',
+      outlierHandling: 'Anthropic (~8000% YoY) and Mistral AI (~1900% YoY) are retained as true outliers from a very small base, not treated as errors — see Watchlist',
+      reconciliationMethod: 'Company self-disclosure preferred over third-party estimate whenever both exist',
+      sourceConflicts: 'xAI ARR estimates range $400M–$500M across trackers; upper-range figure used and flagged',
+      lineage: 'Disclosure / filing → raw landing → name standardization → Dim_Company + Fact_AI_Market_Activity → Company KPIs → Revenue Race / Valuation charts'
+    },
+    investment: {
+      label: 'AI Investment & Funding', sourceSystem: 'Stanford HAI AI Index 2025 · PitchBook · Crunchbase',
+      owner: 'Investment Research (simulated)', refreshFrequency: 'Annual (Stanford HAI Index cycle)',
+      dataType: 'Time series, USD Billions', asOf: '2025-04-01',
+      valueType: '2019–2024 = actual/estimated per source; 2025 = forecast (marked with * in-chart)',
+      confidence: 'high for 2019–2024; low for 2025 forecast',
+      transformationRule: 'Funding rounds mapped to calendar year of close; multi-year rounds allocated to close year only',
+      validationRule: 'US total must exceed sum of category breakdown minus rounding tolerance (2%)',
+      missingValueHandling: 'No missing years in this series',
+      duplicateHandling: 'Follow-on rounds within the same calendar year for the same company are summed, not double-counted',
+      outlierHandling: '2021 investment nearly doubling 2020 retained — corroborated by both Stanford HAI and PitchBook independently',
+      reconciliationMethod: 'Stanford HAI Index used as primary source; PitchBook/Crunchbase used to corroborate category splits',
+      sourceConflicts: 'China investment figures are the least reliable line in this dataset — non-disclosure and state-fund opacity mean the true figure could be materially higher',
+      lineage: 'Funding round record → raw landing → year mapping + category tagging → Fact_AI_Market_Activity → Investment KPIs → Investment Trend / Funding Category charts'
+    },
+    sectors: {
+      label: 'Sector & Vertical Breakdown', sourceSystem: 'Grand View Research · Precedence Research',
+      owner: 'Market Intelligence (simulated)', refreshFrequency: 'Annual',
+      dataType: 'Cross-sectional, % share and % CAGR', asOf: '2025-06-01',
+      valueType: 'market_share_pct = estimated; cagr_pct_2025_2033 = forecast',
+      confidence: 'medium',
+      transformationRule: 'Vertical naming standardized across the two source taxonomies (e.g. "Banking & Finance" → "BFSI")',
+      validationRule: 'Market share column must sum to 100% (±0.5pp) across all seven verticals',
+      missingValueHandling: 'No missing verticals; component mix (HW/SW/Services) validated to sum to 100% per row',
+      duplicateHandling: 'N/A — one row per vertical',
+      outlierHandling: 'Automotive’s 33.2% CAGR against an 11.8% current share is retained and explicitly called out as an early-stage-opportunity signal, not smoothed',
+      reconciliationMethod: 'Precedence Research CAGR used where Grand View Research did not publish a forecast for that vertical',
+      sourceConflicts: 'None material at vertical level; component mix % is directional, not audited',
+      lineage: 'Analyst report → raw landing → vertical taxonomy mapping → Dim_Segment + Fact_AI_Market_Activity → Sector KPIs → Opportunity Matrix / Sector charts'
+    },
+    trajectory: {
+      label: 'Revenue Trajectory', sourceSystem: 'Epoch AI · Company disclosures · The Information',
+      owner: 'Competitive Intelligence (simulated)', refreshFrequency: 'Ad hoc, on disclosure event',
+      dataType: 'Irregular time series, USD Billions', asOf: '2026-04-01',
+      valueType: 'actual (directly disclosed milestone points)',
+      confidence: 'high',
+      transformationRule: 'Irregular disclosure dates retained as-is rather than forced onto a fixed monthly grid, to avoid implying false precision',
+      validationRule: 'Each point must cite a named source in the per-row source field',
+      missingValueHandling: 'Gaps between disclosure points are not interpolated on the chart — the line connects known points only',
+      duplicateHandling: 'Where two sources reported the same milestone, the earlier / primary disclosure is kept',
+      outlierHandling: 'Anthropic Jan 2026 → Apr 2026 jump ($14B → $30B) is a real disclosed step-change, retained and flagged on the Watchlist as warranting confirmation next disclosure cycle',
+      reconciliationMethod: 'Company-confirmed figures override press estimates when both exist for the same period',
+      sourceConflicts: 'The Information’s Jan 2026 Anthropic figure and a company blog figure differed by ~6%; higher (company) figure used',
+      lineage: 'Disclosure event → raw landing → milestone normalization → Fact_AI_Market_Activity → Trajectory KPIs → Revenue Trajectory chart'
+    },
+    benchmarks: {
+      label: 'AI Benchmark Improvements', sourceSystem: 'Stanford HAI AI Index 2025',
+      owner: 'ML Research Intelligence (simulated)', refreshFrequency: 'Annual (HAI Index cycle)',
+      dataType: 'Cross-sectional, benchmark scores 0–100', asOf: '2025-04-01',
+      valueType: 'actual (published academic benchmark results)',
+      confidence: 'high',
+      transformationRule: 'Best-in-class model score per year retained per benchmark (not an average across models)',
+      validationRule: 'improvement_pp must equal score_2024 minus score_2023 exactly',
+      missingValueHandling: 'N/A — complete for all three tracked benchmarks',
+      duplicateHandling: 'N/A',
+      outlierHandling: 'SWE-bench’s +67.3pp jump is retained — it reflects a genuine step-change (agentic coding models), not a measurement error',
+      reconciliationMethod: 'Single authoritative source (Stanford HAI); no cross-source reconciliation needed',
+      sourceConflicts: 'None — single source',
+      lineage: 'Published leaderboard → raw landing → benchmark name standardization → Fact_AI_Market_Activity → Benchmark KPIs → Benchmark Improvement chart'
+    }
+  };
+
+  // Plain-English "why this benchmark matters commercially" — required by the
+  // brief's "business-use-case interpretation for each benchmark" KPI.
+  const BENCHMARK_INTERPRETATION = {
+    'SWE-bench': 'Measures whether a model can independently fix real GitHub issues. The +67.3pp jump is the direct technical driver behind the agentic-coding revenue category (e.g. Claude Code reaching $1B ARR) — capability gains here converted almost immediately into a new, fast-growing product line.',
+    'GPQA': 'Graduate-level science reasoning. Strong gains here support enterprise use cases in R&D, pharma, and engineering copilot products, but translate less directly into consumer revenue — watch for adoption lag versus the benchmark gain.',
+    'MMMU': 'Multimodal (text+image+chart) understanding. The smallest improvement of the three tracked benchmarks — multimodal reasoning remains the most capability-constrained area, which is a risk for any product strategy betting heavily on multimodal agents in the near term.'
+  };
+
+  // Data-quality scorecard (0-100 per dimension) — a portfolio-level, judgment-based
+  // self-assessment of this project's dataset, not a computed statistical audit.
+  const DQ_SCORECARD = {
+    completeness: { score: 88, note: 'A few long-range years (2027, 2029, 2031–2033) are intentionally left blank rather than interpolated.' },
+    accuracy: { score: 74, note: 'High for disclosed company ARR; lower for long-range forecasts and private valuations.' },
+    consistency: { score: 81, note: 'Company naming and unit normalization enforced across all six datasets; some vertical taxonomy differences remain across source reports.' },
+    timeliness: { score: 70, note: 'Fast-moving company disclosures (monthly) refreshed ad hoc; market-size analyst reports only refresh annually, so some figures lag the frontier by months.' },
+    validity: { score: 85, note: 'Share/percentage columns validated to sum to ~100%; growth figures cross-checked against raw deltas.' },
+    uniqueness: { score: 95, note: 'One row per natural key (year, company, vertical, benchmark) enforced in every dataset.' }
+  };
+
+  const SOURCE_CATALOG = [
+    { id: 'stanford-hai', name: 'Stanford HAI — AI Index Report 2025', url: 'hai.stanford.edu', usedFor: 'Investment, adoption, benchmark data' },
+    { id: 'epoch-ai', name: 'Epoch AI — AI Companies Revenue Reports', url: 'epoch.ai', usedFor: 'Company ARR, revenue trajectory' },
+    { id: 'grand-view', name: 'Grand View Research — AI Market Analysis 2025–2033', url: '—', usedFor: 'Market size, sector CAGR' },
+    { id: 'precedence', name: 'Precedence Research — Global AI Market Report 2024–2034', url: '—', usedFor: 'Market size forecast, sector CAGR' },
+    { id: 'market-us', name: 'Market.us — AI Market Size & CAGR Forecast', url: '—', usedFor: 'Market size tie-breaker' },
+    { id: 'visual-capitalist', name: 'Visual Capitalist — Soaring Revenues of AI Companies', url: '—', usedFor: 'Company revenue context' },
+    { id: 'writerbuddy', name: 'WriterBuddy.ai — Top 50 AI Companies 2024', url: '—', usedFor: 'Geographic funding split' },
+    { id: 'tldl', name: 'TLDL.io — AI Company Rankings 2026', url: 'tldl.io', usedFor: 'Infrastructure funding context' },
+    { id: 'company-ir', name: 'Company disclosures / press releases / SEC filings', url: '—', usedFor: 'ARR, valuation, revenue milestones' },
+    { id: 'fortune-bi', name: 'Fortune Business Insights — AI Market Trends 2025', url: '—', usedFor: 'Market context corroboration' }
+  ];
+
   const mktData={
     '2024':{market:'$391B',adoption:'68%',forecast:'$3.68T',naShare:'35.2%',change:'+87% vs 2023',adoptChange:'+13pp vs 2023'},
     '2025':{market:'$542B',adoption:'78%',forecast:'$3.68T',naShare:'35.5%',change:'▲ 38.5% CAGR',adoptChange:'+10pp vs 2024'},
@@ -174,6 +326,11 @@ window.AICC_DATA = (() => {
     invChina,
     segAll,
     trL,
-    trD
+    trD,
+    PROJECT_META,
+    DATA_GOVERNANCE,
+    BENCHMARK_INTERPRETATION,
+    DQ_SCORECARD,
+    SOURCE_CATALOG
   };
 })();

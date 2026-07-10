@@ -35,12 +35,13 @@ function toggleMobileNav() {
 // ─── NAVIGATION ────────────────────────────────────
 
 // The story spine: sections in reading order. About/Jargon are the epilogue.
-const STORY_FLOW = ['market','companies','investment','segments','trends','simulator','pipeline','schema','downloads','summary','about','jargon'];
+const STORY_FLOW = ['market','companies','investment','segments','trends','simulator','pipeline','schema','matrix','watchlist','kpidict','downloads','summary','about','jargon'];
 
 // Which chapter of the rail each section belongs to (about/jargon: none).
 const CHAPTER_OF = {
   market: 1, companies: 2, investment: 3, segments: 4, trends: 4,
-  simulator: 5, pipeline: 5, schema: 5, downloads: 6, summary: 6
+  simulator: 5, pipeline: 5, schema: 5, matrix: 5, watchlist: 5, kpidict: 5,
+  downloads: 6, summary: 6
 };
 
 function syncChapterRail(id) {
@@ -71,6 +72,9 @@ function show(id, el) {
     // canvas has zero width and the draw code would divide against it.
     if (['market','companies','investment','segments','trends'].includes(id)) {
       setTimeout(() => { drawAll(id); initInteractivity(id); }, 60);
+    }
+    if (id === 'matrix' && window.AICC_MATRIX) {
+      setTimeout(() => AICC_MATRIX.renderOpportunityMatrix(), 60);
     }
     if (id === 'summary') {
       document.getElementById('finalScore').textContent = baScore;
@@ -800,11 +804,25 @@ window.addEventListener('load', () => {
   drawAll('market');
   updateProgress();
   setTimeout(()=>initInteractivity('market'),100);
+
+  // Insight layer — Executive Decision Brief, So-What cards, Watchlist,
+  // Data Governance, KPI Dictionary. Pure DOM population, safe to run
+  // once regardless of which section is currently visible.
+  if (window.AICC_INSIGHTS) {
+    AICC_INSIGHTS.renderExecutiveBrief();
+    AICC_INSIGHTS.renderAllSoWhat();
+    AICC_INSIGHTS.renderBenchmarkInterpretation();
+    AICC_INSIGHTS.renderWatchlist();
+    AICC_INSIGHTS.renderGovernance();
+  }
+  if (window.AICC_KPI_DICT) AICC_KPI_DICT.render();
+  if (window.AICC_MATRIX) AICC_MATRIX.renderOpportunityMatrix();
 });
 window.addEventListener('resize', () => {
   const active = document.querySelector('.section.active');
   if (active) {
     const id = active.id;
     if (['market','companies','investment','segments','trends'].includes(id)) drawAll(id);
+    if (id === 'matrix' && window.AICC_MATRIX) AICC_MATRIX.renderOpportunityMatrix();
   }
 });
