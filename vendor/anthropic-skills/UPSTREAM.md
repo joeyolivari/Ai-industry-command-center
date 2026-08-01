@@ -2,7 +2,7 @@
 
 Source: https://github.com/anthropics/skills
 Synced ref: main
-Synced commit: 9d2f1ae187231d8199c64b5b762e1bdf2244733d
+Synced commit: b29e7cf65e5cb78a5ac33d582270551bc74a14eb
 
 This folder is a vendored copy of Anthropic's public Agent Skills repository content needed for Claude/agent workflows. Keep it isolated from the main app code and preserve upstream notices.
 
